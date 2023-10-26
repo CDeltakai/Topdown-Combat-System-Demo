@@ -45,10 +45,24 @@ public class RangedWeaponSO : ScriptableObject
     public float Spread { get{ return _spread; } }
 
 [Header("Advanced Properties")]
+    [Tooltip("The projectile prefab the weapon will fire.")]
     [SerializeField] GameObject _projectilePrefab;
     public GameObject ProjectilePrefab { get{ return _projectilePrefab; } }
 
+    [Tooltip("The muzzle flash particle effect that triggers when this weapon is fired.")]
+    [SerializeField] GameObject _muzzleFlashPrefab;
+    public GameObject MuzzleFlashPrefab { get{ return _muzzleFlashPrefab; } }
 
+[Header("Miscellaneous Properties")]
+    [Tooltip("How long the camera shakes for when the weapon is fired.")]
+    [Min(0)]
+    [SerializeField] float _cameraShakeDuration;
+    public float CameraShakeDuration { get { return _cameraShakeDuration; }}
+
+    [Tooltip("The strength of camera shake when this weapon is fired.")]
+    [Min(0)]
+    [SerializeField] float _cameraShakeMagnitude;
+    public float CameraShakeMagnitude { get { return _cameraShakeMagnitude; }}    
 
 
 }

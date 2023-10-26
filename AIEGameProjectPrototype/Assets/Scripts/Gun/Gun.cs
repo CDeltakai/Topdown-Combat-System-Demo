@@ -21,20 +21,7 @@ public class Gun : RangedWeapon
     }
 
 
-    public override void OnFire()
-    {
 
-        for(int i = 0; i < weaponData.BurstCount; i++) 
-        {
-            float spread = Random.Range(-weaponData.Spread, weaponData.Spread);
-            Vector3 fireDirection = Quaternion.Euler(0, spread, 0) * firePoint.forward;
-
-            Bullet bullet = Instantiate(projectile, firePoint.position, firePoint.rotation).GetComponent<Bullet>();
-            bullet.rigBody.velocity = fireDirection * bullet.speed;
-        }
-
-
-    }
 
 
 

@@ -46,14 +46,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 873e59519bf8b434980652ddd0db72ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firePoint: {fileID: 5250270780804209217}
   weaponData: {fileID: 11400000, guid: 6f5124e30ba85ac4a8c819e2d56a4222, type: 2}
-  <FireRate>k__BackingField: 0
-  damagePayload:
-    baseDamage: 0
-    attacker: {fileID: 0}
+  muzzleFlash: {fileID: 0}
   projectile: {fileID: 5201850327758398847, guid: a160e4183996aa5429b4b501c1e28066,
     type: 3}
-  firePoint: {fileID: 5250270780804209217}
   damage: 1
 --- !u!1 &5250270780804209222
 GameObject:

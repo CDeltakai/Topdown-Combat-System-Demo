@@ -6,6 +6,7 @@ public abstract class RangedWeapon : MonoBehaviour
 {
     [SerializeField] protected Transform firePoint;
     [SerializeField] protected RangedWeaponSO weaponData;
+    [SerializeField] ParticleSystem muzzleFlash;
     protected DamagePayload damagePayload;
 
     protected int magazineCapacity;
@@ -27,6 +28,11 @@ public abstract class RangedWeapon : MonoBehaviour
         reserveCapacity = weaponData.ReserveCapacity;
         currentReserve = reserveCapacity;
 
+        if(weaponData.MuzzleFlashPrefab)
+        {
+            muzzleFlash = Instantiate(weaponData.MuzzleFlashPrefab, firePoint).GetComponent<ParticleSystem>();
+        }
+
     }
 
 
@@ -42,6 +48,12 @@ public abstract class RangedWeapon : MonoBehaviour
             Bullet bullet = Instantiate(weaponData.ProjectilePrefab, firePoint.position, firePoint.rotation).GetComponent<Bullet>();
             bullet.rigBody.velocity = fireDirection * bullet.speed;
         }
+
+        if(muzzleFlash)
+        {
+            muzzleFlash.Play();
+        }
+
     }
 
     public virtual void Reload(){}

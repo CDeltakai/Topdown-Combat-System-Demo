@@ -15,10 +15,17 @@ MonoBehaviour:
   weaponName: Pistol
   <Payload>k__BackingField:
     baseDamage: 10
+    damageType: 0
     attacker: {fileID: 0}
-  _fireRate: 0
+  _fireRate: 0.14
   <FullAuto>k__BackingField: 0
-  _burstCount: 1
-  <MagazineCapacity>k__BackingField: 0
-  <ReserveCapacity>k__BackingField: 0
-  _spread: 0
+  _burstCount: 3
+  _magazineCapacity: 0
+  _reserveCapacity: 0
+  _spread: 8
+  _projectilePrefab: {fileID: 5201850327758398847, guid: a160e4183996aa5429b4b501c1e28066,
+    type: 3}
+  _muzzleFlashPrefab: {fileID: 2926900732954211345, guid: 044d2400bb012dd4ca02f31651faa59b,
+    type: 3}
+  _cameraShakeDuration: 0
+  _cameraShakeMagnitude: 0
