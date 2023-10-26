@@ -49,6 +49,11 @@ public class RangedWeaponSO : ScriptableObject
     [SerializeField] GameObject _projectilePrefab;
     public GameObject ProjectilePrefab { get{ return _projectilePrefab; } }
 
+    [Range(0.01f, 200)]
+    [Tooltip("How long the projectile will stay in the scene before self-destructing.")]
+    [SerializeField] float _projectileLifetime;
+    public float ProjectileLifetime{get { return _projectileLifetime; }}
+
     [Tooltip("The muzzle flash particle effect that triggers when this weapon is fired.")]
     [SerializeField] GameObject _muzzleFlashPrefab;
     public GameObject MuzzleFlashPrefab { get{ return _muzzleFlashPrefab; } }

@@ -5,9 +5,10 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
 
+    public float lifetime = 2;
     public Rigidbody rigBody { get; private set; }
 
-    public int damage = 10;
+    public DamagePayload damagePayload;
 
     public float speed = 50;
     public Vector3 velocity = new Vector3();
@@ -22,7 +23,7 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(SelfDestruct());
+        StartCoroutine(SelfDestruct(lifetime));
     }
 
     private void FixedUpdate() 
@@ -42,7 +43,7 @@ public class Bullet : MonoBehaviour
             Entity entity = other.GetComponent<Entity>();
             if(entity)
             {
-                entity.HurtEntity(damage);
+                entity.HurtEntity(damagePayload.baseDamage);
                 Destroy(gameObject);
             }
         }    
@@ -50,9 +51,9 @@ public class Bullet : MonoBehaviour
 
 
 
-    IEnumerator SelfDestruct()
+    IEnumerator SelfDestruct(float delay = 2)
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(delay);
         Destroy(gameObject);
     }
 }

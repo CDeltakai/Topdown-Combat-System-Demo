@@ -25,7 +25,8 @@ MonoBehaviour:
   _spread: 8
   _projectilePrefab: {fileID: 5201850327758398847, guid: a160e4183996aa5429b4b501c1e28066,
     type: 3}
+  _projectileLifetime: 1.5
   _muzzleFlashPrefab: {fileID: 2926900732954211345, guid: 044d2400bb012dd4ca02f31651faa59b,
     type: 3}
-  _cameraShakeDuration: 0
-  _cameraShakeMagnitude: 0
+  _cameraShakeDuration: 0.2
+  _cameraShakeMagnitude: 0.1
