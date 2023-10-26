@@ -7,8 +7,8 @@ using UnityEngine;
 public struct DamagePayload
 {
     public int baseDamage;
+    public DamageType damageType;
     public GameObject attacker;
-
 
 }
 

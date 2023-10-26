@@ -5,7 +5,7 @@ using UnityEngine;
 public class Gun : RangedWeapon
 {
     [SerializeField] GameObject projectile;
-    [SerializeField] Transform firePoint;
+   
 
     [SerializeField] int damage = 1;
 
