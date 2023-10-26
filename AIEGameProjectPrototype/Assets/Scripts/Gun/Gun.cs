@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gun : MonoBehaviour
+public class Gun : RangedWeapon
 {
     [SerializeField] GameObject projectile;
     [SerializeField] Transform firePoint;
@@ -21,10 +21,18 @@ public class Gun : MonoBehaviour
     }
 
 
-    public void OnFire()
+    public override void OnFire()
     {
-        Bullet bullet = Instantiate(projectile, firePoint.position, firePoint.rotation).GetComponent<Bullet>();
-        bullet.rigBody.velocity = firePoint.forward * bullet.speed;
+
+        for(int i = 0; i < weaponData.BurstCount; i++) 
+        {
+            float spread = Random.Range(-weaponData.Spread, weaponData.Spread);
+            Vector3 fireDirection = Quaternion.Euler(0, spread, 0) * firePoint.forward;
+
+            Bullet bullet = Instantiate(projectile, firePoint.position, firePoint.rotation).GetComponent<Bullet>();
+            bullet.rigBody.velocity = fireDirection * bullet.speed;
+        }
+
 
     }
 
