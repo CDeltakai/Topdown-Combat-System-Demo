@@ -11,7 +11,7 @@
     <RootNamespace></RootNamespace>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary</AssemblyName>
+    <AssemblyName>Unity.VisualEffectGraph.Runtime</AssemblyName>
     <TargetFramework>netstandard2.1</TargetFramework>
     <BaseDirectory>.</BaseDirectory>
   </PropertyGroup>
@@ -20,7 +20,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>Temp\Bin\Debug\</OutputPath>
-    <DefineConstants>UNITY_2021_3_31;UNITY_2021_3;UNITY_2021;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_INCLUDE_TESTS;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_ENGINE_CODE_STRIPPING;ENABLE_MANAGED_UNITYTLS;RENDER_SOFTWARE_CURSOR;ENABLE_VIDEO;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;PLATFORM_WEBGL;TEXTCORE_1_0_OR_NEWER;UNITY_WEBGL;UNITY_WEBGL_API;UNITY_DISABLE_WEB_VERIFICATION;UNITY_GFX_USE_PLATFORM_VSYNC;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_SPATIALTRACKING;ENABLE_MONO;NET_STANDARD_2_0;NET_STANDARD;NET_STANDARD_2_1;NETSTANDARD;NETSTANDARD2_1;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_INPUT_SYSTEM;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;STARTER_ASSETS_PACKAGES_CHECKED;UNITY_POST_PROCESSING_STACK_V2;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
+    <DefineConstants>UNITY_2021_3_31;UNITY_2021_3;UNITY_2021;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_INCLUDE_TESTS;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_ENGINE_CODE_STRIPPING;ENABLE_MANAGED_UNITYTLS;RENDER_SOFTWARE_CURSOR;ENABLE_VIDEO;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;PLATFORM_WEBGL;TEXTCORE_1_0_OR_NEWER;UNITY_WEBGL;UNITY_WEBGL_API;UNITY_DISABLE_WEB_VERIFICATION;UNITY_GFX_USE_PLATFORM_VSYNC;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_SPATIALTRACKING;ENABLE_MONO;NET_STANDARD_2_0;NET_STANDARD;NET_STANDARD_2_1;NETSTANDARD;NETSTANDARD2_1;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_INPUT_SYSTEM;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;STARTER_ASSETS_PACKAGES_CHECKED;UNITY_POST_PROCESSING_STACK_V2;VFX_HAS_TIMELINE;VFX_HAS_TERRAINMODULE;VFX_HAS_UI;VFX_HAS_PHYSICS;VFX_HAS_AUDIO;VFX_HAS_INPUT_SYSTEM_PACKAGE;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
@@ -53,20 +53,136 @@
     <Analyzer Include="C:\Users\Matthew Qiu\.vscode\extensions\visualstudiotoolsforunity.vstuc-0.9.2\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Library\PackageCache\com.unity.shadergraph@12.1.12\ShaderGraphLibrary\DummyShaderGraphLibrary.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\PropertyBinding\Implementation\VFXRaycastBinder.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\PropertyBinding\Implementation\VFXTerrainBinder.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\PropertyBinding\VFXPropertyBinder.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Types\VFXTypes.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\Playables\VisualEffectActivation\VisualEffectActivationClip.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\EventBinding\Implementation\VFXTriggerEventBinder.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\PropertyBinding\Implementation\VFXHierarchyAttributeMapBinder.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\EventBinding\VFXEventBinderBase.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\PropertyBinding\Implementation\VFXMultiplePositionBinder.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\PropertyBinding\Implementation\VFXInputButtonBinder.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\PropertyBinding\Implementation\VFXPositionBinder.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\PropertyBinding\Implementation\VFXInputTouchBinder.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\EventBinding\Implementation\VFXMouseEventBinder.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\Playables\VisualEffectActivation\VisualEffectActivationMixerBehaviour.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\Playables\VisualEffectActivation\VisualEffectActivationTrack.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\PropertyBinding\Implementation\VFXPreviousPositionBinder.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\PropertyBinding\Implementation\VFXLightBinder.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\PropertyBinding\Implementation\VFXTransformBinder.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\PropertyBinding\Implementation\VFXEnabledBinder.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\PropertyBinding\Implementation\VFXPlaneBinder.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\PropertyBinding\VFXBinderAttribute.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\SDF\MeshToSDFBaker.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\Playables\VisualEffectActivation\VisualEffectActivationBehaviour.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\PropertyBinding\Implementation\VFXUISliderBinder.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\PropertyBinding\Implementation\VFXUIDropdownBinder.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\PropertyBinding\Implementation\VFXUIToggleBinder.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\VFXRuntimeResources.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\CustomSpawners\SetSpawnTime.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\PropertyBinding\ExposedProperty.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\CustomSpawners\LoopAndDelay.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\CustomSpawners\IncrementStripIndexOnStart.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\PropertyBinding\Implementation\VFXAudioSpectrumBinder.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\PropertyBinding\Implementation\VFXInputKeyBinder.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\CustomSpawners\SpawnOverDistance.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\PropertyBinding\Implementation\VFXVelocityBinder.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\PropertyBinding\Implementation\VFXSphereBinder.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\PropertyBinding\VFXPropertyBindingAttribute.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\PropertyBinding\VFXBinderBase.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\PropertyBinding\Implementation\VFXInputMouseBinder.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\EventBinding\Implementation\VFXRigidBodyCollisionEventBinder.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\OutputEventHandlers\VFXOutputEventAbstractHandler.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\PackageInfo.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\PropertyBinding\Implementation\VFXInputAxisBinder.cs" />
+    <Compile Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Runtime\Utilities\EventBinding\Implementation\VFXVisibilityEventBinder.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Library\PackageCache\com.unity.shadergraph@12.1.12\ShaderGraphLibrary\ShaderVariablesFunctions.hlsl" />
-    <None Include="Library\PackageCache\com.unity.shadergraph@12.1.12\ShaderGraphLibrary\LODDitheringTransition.hlsl" />
-    <None Include="Library\PackageCache\com.unity.shadergraph@12.1.12\ShaderGraphLibrary\PreviewVaryings.hlsl" />
-    <None Include="Library\PackageCache\com.unity.shadergraph@12.1.12\ShaderGraphLibrary\Functions.hlsl" />
-    <None Include="Library\PackageCache\com.unity.shadergraph@12.1.12\ShaderGraphLibrary\GeometricTools.hlsl" />
-    <None Include="Library\PackageCache\com.unity.shadergraph@12.1.12\ShaderGraphLibrary\ShaderVariables.hlsl" />
-    <None Include="Library\PackageCache\com.unity.shadergraph@12.1.12\ShaderGraphLibrary\Nature\SpeedTree8Wind.hlsl" />
-    <None Include="Library\PackageCache\com.unity.shadergraph@12.1.12\ShaderGraphLibrary\ShaderConfig.cs.hlsl" />
-    <None Include="Library\PackageCache\com.unity.shadergraph@12.1.12\ShaderGraphLibrary\ShaderVariablesMatrixDefsLegacyUnity.hlsl" />
-    <None Include="Library\PackageCache\com.unity.shadergraph@12.1.12\ShaderGraphLibrary\PreviewPass.hlsl" />
-    <None Include="Library\PackageCache\com.unity.shadergraph@12.1.12\ShaderGraphLibrary\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.asmdef" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticlePoints\PassVelocity.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleLinesSW\Pass.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticlePlanarPrimitives\PassForward.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Unity.VisualEffectGraph.Runtime.asmdef" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleHexahedron\PassBasicForward.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleMeshes\PassSelection.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleSpheres\PassShadowCaster.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\VFXInit.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleMeshes\PassDepth.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticlePoints\PassForwardCommon.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleLines\PassSelection.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\VFXCopyBuffer.compute" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleDecals\PassForward.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleLines\PassVelocity.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\VFXCommonOutput.hlsl" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleLinesSW\PassForward.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleHexahedron\Pass.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\VFXParticleStripCommon.hlsl" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticlePlanarPrimitives\PassVelocity.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleMeshes\PassForward.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\VFXMeshSampling.hlsl" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleLines\PassForward.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\VFXFillIndirectArgs.compute" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticlePoints\PassDepth.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\VFXMatricesOverride.hlsl" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleLinesSW\PassSelection.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\VFXOutputUpdate.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticlePlanarPrimitives\PassGS.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\SDFBaker\SdfUtils.hlsl" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticlePoints\PassDepthOrMV.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleHexahedron\PassForward.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticlePoints\PassSelection.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleDecals\Pass.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\VFXBoundsReduction.hlsl" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticlePoints\PassDepthNormal.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\Common\VFXCommonCompute.hlsl" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticlePoints\Pass.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\VFXParticleHeader.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticlePlanarPrimitives\PassDepthOrMV.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticlePlanarPrimitives\PassDepth.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleSpheres\PassDepth.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleMeshes\PassDepthNormal.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\VFXUpdate.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleLinesSW\PassDepthNormal.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticlePlanarPrimitives\PassShadowCaster.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleHexahedron\PassBasicForwardCommon.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticlePlanarPrimitives\PassForwardCommon.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleLines\PassDepth.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleMeshes\PassVelocity.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\SDFBaker\GenSdfRayMap.compute" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticlePoints\PassShadowCaster.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\VFXNoise.hlsl" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleHexahedron\PassDepth.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleHexahedron\PassSelection.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleHexahedron\PassVelocity.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\Sort.compute" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\SDFBaker\RayMapVoxelize.shader" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\VFXCameraSort.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleLines\PassForwardCommon.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleLinesSW\PassVelocity.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleMeshes\Pass.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleLines\PassShadowCaster.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticlePlanarPrimitives\PassDepthNormal.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleLinesSW\PassForwardCommon.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleHexahedron\PassShadowCaster.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleLines\PassDepthOrMV.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\VFXCommon.hlsl" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleLinesSW\PassShadowCaster.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticlePoints\PassForward.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleLinesSW\PassDepth.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticlePlanarPrimitives\Pass.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\VFXParticleCommon.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleMeshes\PassShadowCaster.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleMeshes\PassDepthOrMV.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleMeshes\PassForwardCommon.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleLinesSW\PassDepthOrMV.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticlePlanarPrimitives\PassVS.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleDecals\PassSelection.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticlePlanarPrimitives\PassSelection.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleSpheres\Pass.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\UpdateStrips.compute" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleLines\PassDepthNormal.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleHexahedron\PassDepthOrMV.template" />
+    <None Include="Library\PackageCache\com.unity.visualeffectgraph@12.1.12\Shaders\ParticleLines\Pass.template" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -725,6 +841,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Unity.Timeline.csproj" />
+    <ProjectReference Include="Unity.InputSystem.csproj" />
     <ProjectReference Include="UnityEditor.UI.csproj" />
     <ProjectReference Include="UnityEngine.UI.csproj" />
   </ItemGroup>

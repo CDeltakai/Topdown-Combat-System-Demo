@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Bullet : MonoBehaviour, IPoolable
 {
 
     public float lifetime = 2;
@@ -13,6 +13,8 @@ public class Bullet : MonoBehaviour
     public float speed = 50;
     public Vector3 velocity = new Vector3();
 
+    public event IPoolable.DisableObjectEvent OnDisableObject;
+    public event IPoolable.ActivateObjectEvent OnActivateObject;
 
     private void Awake() 
     {
@@ -55,5 +57,17 @@ public class Bullet : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         Destroy(gameObject);
+    }
+
+    public void ActivateObject()
+    {
+        gameObject.SetActive(true);
+        OnActivateObject?.Invoke(this);
+    }
+
+    public void DisableObject()
+    {
+        gameObject.SetActive(false);
+        OnDisableObject?.Invoke(this);
     }
 }

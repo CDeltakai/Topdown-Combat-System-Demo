@@ -11,11 +11,12 @@ public enum DamageType
 
 
 [CreateAssetMenu(fileName = "Ranged Weapon Data", menuName = "New Ranged Weapon Data", order = 0)]
-public class RangedWeaponSO : ScriptableObject
+public class RangedWeaponDataSO : ScriptableObject
 {
 
 [Header("Combat Attributes")]
-    [SerializeField] string weaponName;
+    [SerializeField] string _weaponName;
+    public string WeaponName {get{ return _weaponName; }}
 
     [field:SerializeField] public DamagePayload Payload{ get; private set; }
 

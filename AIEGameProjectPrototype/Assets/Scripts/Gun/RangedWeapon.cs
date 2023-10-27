@@ -1,16 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class RangedWeapon : MonoBehaviour
 {
     [SerializeField] protected Transform firePoint;
-    [SerializeField] protected RangedWeaponSO weaponData;
+    [SerializeField] protected RangedWeaponDataSO weaponData;
     [SerializeField] ParticleSystem muzzleFlash;
     protected DamagePayload damagePayload;
-
     protected CinemachineImpulseSource cinemachineImpulseSource;
+    //protected ObjectPool projectilePool;
 
 
     protected int magazineCapacity;
@@ -20,6 +21,7 @@ public abstract class RangedWeapon : MonoBehaviour
     protected int currentReserve;
 
 
+    bool canFire = true;
 
 
     protected virtual void Awake() 
@@ -43,12 +45,21 @@ public abstract class RangedWeapon : MonoBehaviour
 
     protected virtual void Start()
     {
-
+        CreateProjectilePool();
     }
 
+    void CreateProjectilePool()
+    {
+        GameObject newProjectilePool = new(weaponData.WeaponName +"ProjectilePool");
+        //newProjectilePool.AddComponent<ObjectPool>();
+        //projectilePool = newProjectilePool.GetComponent<ObjectPool>();
+    }
 
     public virtual void OnFire()
     {
+
+        if(!canFire){ return; }
+
         for(int i = 0; i < weaponData.BurstCount; i++) 
         {
             float spread = Random.Range(-weaponData.Spread, weaponData.Spread);
@@ -65,6 +76,10 @@ public abstract class RangedWeapon : MonoBehaviour
             muzzleFlash.Play();
         }
 
+
+        StartCoroutine(Cooldown(weaponData.FireRate));
+
+
         if(cinemachineImpulseSource)
         {
             cinemachineImpulseSource.m_DefaultVelocity = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0);
@@ -78,6 +93,12 @@ public abstract class RangedWeapon : MonoBehaviour
     public virtual void Reload(){}
 
 
+    protected IEnumerator Cooldown(float duration)
+    {
+        canFire = false;
+        yield return new WaitForSeconds(duration);
+        canFire = true;
+    }
 
 
 }
