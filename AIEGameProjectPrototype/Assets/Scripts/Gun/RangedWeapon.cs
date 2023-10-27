@@ -39,7 +39,7 @@ public abstract class RangedWeapon : MonoBehaviour
     GameObjectPool projectilePool;
 
     bool canFire = true;
-    bool infiniteAmmo = false;
+    public bool infiniteAmmo = false;
 
     Coroutine CR_ReloadTimer = null;
     Coroutine CR_Cooldown = null;
