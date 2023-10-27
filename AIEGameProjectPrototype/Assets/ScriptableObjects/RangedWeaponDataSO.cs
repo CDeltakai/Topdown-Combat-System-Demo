@@ -13,6 +13,8 @@ public enum DamageType
 [CreateAssetMenu(fileName = "Ranged Weapon Data", menuName = "New Ranged Weapon Data", order = 0)]
 public class RangedWeaponDataSO : ScriptableObject
 {
+    public const float MINIMUM_FIRERATE = 0.05f;
+
 
 [Header("Combat Attributes")]
     [SerializeField] string _weaponName;
@@ -20,9 +22,16 @@ public class RangedWeaponDataSO : ScriptableObject
 
     [field:SerializeField] public DamagePayload Payload{ get; private set; }
 
+[Tooltip("The time delay between rounds fired. Higher = slower fire-rate. 0 means the player can fire the weapon as quickly as they click the mouse." +
+" If the weapon is full auto, the minimum fire-rate will be set to 0.05f.")]
     [Range(0, 10)]
     [SerializeField] float _fireRate;
-    public float FireRate{ get { return _fireRate; } }
+    public float FireRate{ get { 
+        if(FullAuto && _fireRate < MINIMUM_FIRERATE)
+        {
+            return 0.05f;
+        }
+        return _fireRate; } }
 
     [field:SerializeField] public bool FullAuto { get; private set; }
 
@@ -35,9 +44,21 @@ public class RangedWeaponDataSO : ScriptableObject
     [SerializeField] int _magazineCapacity;
     public int MagazineCapacity { get { return _magazineCapacity; }}
 
+
+[Tooltip("How long it takes for the weapon to reload")]
+    [Min(0)]
+    [SerializeField] float _reloadDuration;
+    public float ReloadDuration { get { return _reloadDuration; }}
+
+
+[Tooltip("Dictates whether the weapon draws munitions directly from its ammo reserve, ignoring magazine capacity.")]
+    [SerializeField] bool _drawsFromReserve;
+    public bool DrawsFromReserve { get { return _drawsFromReserve; }}
+
+
     [Min(0)]
     [SerializeField] int _reserveCapacity;
-    public int ReserveCapacity { get { return _magazineCapacity; }}
+    public int ReserveCapacity { get { return _reserveCapacity; }}
 
 
 [Tooltip("The random angular deviation of the weapon's projectiles when fired.")]

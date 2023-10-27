@@ -10,18 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f7618be28367744cb325819235f28b1, type: 3}
-  m_Name: Pistol
+  m_Name: DefaultGun
   m_EditorClassIdentifier: 
-  weaponName: Pistol
+  _weaponName: DefaultGun
   <Payload>k__BackingField:
     baseDamage: 10
     damageType: 0
     attacker: {fileID: 0}
-  _fireRate: 0.14
+  _fireRate: 0
   <FullAuto>k__BackingField: 0
   _burstCount: 3
-  _magazineCapacity: 0
-  _reserveCapacity: 0
+  _magazineCapacity: 20
+  _reloadDuration: 1
+  _drawsFromReserve: 0
+  _reserveCapacity: 200
   _spread: 8
   _projectilePrefab: {fileID: 5201850327758398847, guid: a160e4183996aa5429b4b501c1e28066,
     type: 3}

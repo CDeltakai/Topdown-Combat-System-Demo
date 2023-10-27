@@ -300,7 +300,12 @@ namespace StarterAssets
 
         void OnShoot()
         {
-            currentGun.OnFire();
+            currentGun.PullTrigger();
+        }
+
+        void OnReload()
+        {
+            currentGun.StartReload();
         }
 
 

@@ -17,9 +17,11 @@ public class MeleeWeaponDataSO : ScriptableObject
     [SerializeField] float _swingCooldown;
     public float SwingCooldown{ get { return _swingCooldown; } }
 
+
+[Tooltip("The modifier for how much bigger the hitbox collider for the melee weapon is.")]
     [Min(0)]
-    [SerializeField] float _attackRangeMod;
-    public float AttackRangeMod{get{ return _attackRangeMod; }}
+    [SerializeField] Vector2 _attackRangeMod;
+    public Vector2 AttackRangeMod{get{ return _attackRangeMod; }}
 
 
 }

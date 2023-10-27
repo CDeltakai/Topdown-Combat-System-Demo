@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour, IPoolable
 {
+    public bool objectIsPooled;
 
     public float lifetime = 2;
     public Rigidbody rigBody { get; private set; }
@@ -16,16 +17,20 @@ public class Bullet : MonoBehaviour, IPoolable
     public event IPoolable.DisableObjectEvent OnDisableObject;
     public event IPoolable.ActivateObjectEvent OnActivateObject;
 
+    Coroutine CR_SelfDestruct = null;
+    public TrailRenderer trailRenderer { get; private set; }
+
     private void Awake() 
     {
         rigBody = GetComponent<Rigidbody>();
+        trailRenderer = GetComponent<TrailRenderer>();
     }
 
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(SelfDestruct(lifetime));
+        CR_SelfDestruct = StartCoroutine(SelfDestruct(lifetime));
     }
 
     private void FixedUpdate() 
@@ -34,21 +39,39 @@ public class Bullet : MonoBehaviour, IPoolable
         rigBody.MovePosition(rigBody.position + velocity * Time.fixedDeltaTime * speed);    
     }
 
-    private void OnTriggerEnter(Collider other) 
+    
+    private void OnCollisionEnter(Collision collision)
     {
-        if(other.CompareTag("Wall"))
+
+        if(collision.gameObject.CompareTag("Wall"))
         {
-            Destroy(gameObject);
+            if(objectIsPooled)
+            {
+                DisableObject();
+            }else
+            {
+                Destroy(gameObject);
+            }
+            return;
         }
-        if(other.CompareTag("Enemy"))
+
+        if(collision.gameObject.CompareTag("Enemy"))
         {
-            Entity entity = other.GetComponent<Entity>();
+            Entity entity = collision.gameObject.GetComponent<Entity>();
             if(entity)
             {
                 entity.HurtEntity(damagePayload.baseDamage);
-                Destroy(gameObject);
+
+                if(objectIsPooled)
+                {
+                    DisableObject();
+                }else
+                {
+                    Destroy(gameObject);
+                }
             }
-        }    
+        }
+
     }
 
 
@@ -56,18 +79,51 @@ public class Bullet : MonoBehaviour, IPoolable
     IEnumerator SelfDestruct(float delay = 2)
     {
         yield return new WaitForSeconds(delay);
-        Destroy(gameObject);
+
+        if(objectIsPooled)
+        {
+            DisableObject();
+        }else
+        {
+            Destroy(gameObject);
+        }
+
     }
 
     public void ActivateObject()
     {
         gameObject.SetActive(true);
-        OnActivateObject?.Invoke(this);
+
+        if (trailRenderer) 
+        {
+            // Clear the trail
+            float originalTime = trailRenderer.time;
+            trailRenderer.time = 0;
+            trailRenderer.Clear();
+            trailRenderer.time = originalTime;
+
+            trailRenderer.enabled = true;
+            trailRenderer.emitting = true; 
+        }        
+
+        StartCoroutine(SelfDestruct(lifetime));
+        OnActivateObject?.Invoke(gameObject);
     }
 
     public void DisableObject()
     {
+        if(CR_SelfDestruct != null)
+        {
+            StopCoroutine(CR_SelfDestruct);
+        }
+
+        if (trailRenderer) 
+        { 
+            trailRenderer.emitting = false;
+            trailRenderer.enabled = false;
+        }
+
         gameObject.SetActive(false);
-        OnDisableObject?.Invoke(this);
+        OnDisableObject?.Invoke(gameObject);
     }
 }

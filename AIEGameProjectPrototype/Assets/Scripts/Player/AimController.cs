@@ -5,14 +5,11 @@ using UnityEngine.InputSystem;
 
 public class AimController : MonoBehaviour
 {
-    [SerializeField] Camera cinemaCamera;
+    [SerializeField] Camera cameraPosition;
+    [SerializeField] float rotationSpeed = 7;
 
-    private void Start()
-    {
 
-    }
-
-    private void Update()
+    void Update()
     {
         RotateTowardsMouse();
     }
@@ -23,7 +20,7 @@ public class AimController : MonoBehaviour
         Plane playerPlane = new Plane(Vector3.up, transform.position);
 
         // Generate a ray from the cursor position
-        Ray ray = cinemaCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        Ray ray = cameraPosition.ScreenPointToRay(Mouse.current.position.ReadValue());
 
         // Determine the point where the cursor ray intersects the plane.
         float hitdist = 0.0f;
@@ -36,7 +33,7 @@ public class AimController : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
 
             // Smoothly rotate towards the target point.
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 7f * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
     }
 }

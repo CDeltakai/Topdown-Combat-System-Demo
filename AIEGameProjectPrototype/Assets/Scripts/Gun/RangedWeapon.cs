@@ -1,42 +1,60 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class RangedWeapon : MonoBehaviour
 {
+    public delegate void DischargeWeaponEventHandler();
+    public event DischargeWeaponEventHandler OnDischarge;
+
+    public delegate void ReloadWeaponEventHandler();
+    public event ReloadWeaponEventHandler OnReload;
+
     [SerializeField] protected Transform firePoint;
-    [SerializeField] protected RangedWeaponDataSO weaponData;
+    [SerializeField] protected RangedWeaponDataSO _weaponData;
+    public RangedWeaponDataSO WeaponData {get{ return _weaponData; }}
+
     [SerializeField] ParticleSystem muzzleFlash;
     protected DamagePayload damagePayload;
     protected CinemachineImpulseSource cinemachineImpulseSource;
-    //protected ObjectPool projectilePool;
 
 
-    protected int magazineCapacity;
-    protected int currentMagazine;
+    [SerializeField] protected int _magazineCapacity;
+    public int MagazineCapacity{get{ return _magazineCapacity; }}
 
-    protected int reserveCapacity;
-    protected int currentReserve;
+    [SerializeField] protected int _currentMagazine;
+    public int CurrentMagazine{get{ return _currentMagazine; }}
 
+    [SerializeField] protected int _reserveCapacity;
+    public int ReserveCapacity{get{ return _reserveCapacity; }}
+
+    [SerializeField] protected int _currentReserve;
+    public int CurrentReserve{get{ return _currentReserve; }}
+
+    GameObjectPool projectilePool;
 
     bool canFire = true;
+    Coroutine CR_ReloadTimer = null;
+    Coroutine CR_Cooldown = null;
+
 
 
     protected virtual void Awake() 
     {
-        damagePayload = weaponData.Payload;
+        damagePayload = _weaponData.Payload;
 
-        magazineCapacity = weaponData.MagazineCapacity;
-        currentMagazine = magazineCapacity;
+        _magazineCapacity = _weaponData.MagazineCapacity;
+        _currentMagazine = _magazineCapacity;
 
-        reserveCapacity = weaponData.ReserveCapacity;
-        currentReserve = reserveCapacity;
+        _reserveCapacity = _weaponData.ReserveCapacity;
+        _currentReserve = _reserveCapacity;
 
-        if(weaponData.MuzzleFlashPrefab)
+        if(_weaponData.MuzzleFlashPrefab)
         {
-            muzzleFlash = Instantiate(weaponData.MuzzleFlashPrefab, firePoint).GetComponent<ParticleSystem>();
+            muzzleFlash = Instantiate(_weaponData.MuzzleFlashPrefab, firePoint).GetComponent<ParticleSystem>();
         }
 
         cinemachineImpulseSource = GetComponent<CinemachineImpulseSource>();
@@ -48,49 +66,166 @@ public abstract class RangedWeapon : MonoBehaviour
         CreateProjectilePool();
     }
 
+    //Dynamically create a new projectile pool in the scene for optimization purposes
     void CreateProjectilePool()
     {
-        GameObject newProjectilePool = new(weaponData.WeaponName +"ProjectilePool");
-        //newProjectilePool.AddComponent<ObjectPool>();
-        //projectilePool = newProjectilePool.GetComponent<ObjectPool>();
+        GameObject newProjectilePool = new(_weaponData.WeaponName +"_ProjectilePool");
+        newProjectilePool.AddComponent<GameObjectPool>();
+        projectilePool = newProjectilePool.GetComponent<GameObjectPool>();
+        projectilePool.prefab = _weaponData.ProjectilePrefab;
+
+        if(!_weaponData.FullAuto)
+        {
+            projectilePool.AddObject(10); //Add some starting projectiles to the pool to smoothen gameplay
+        }else
+        {
+            projectilePool.AddObject((int)( 1 / _weaponData.FireRate * _weaponData.BurstCount));
+        }
+
+
     }
 
-    public virtual void OnFire()
+    public virtual void PullTrigger()
     {
 
         if(!canFire){ return; }
-
-        for(int i = 0; i < weaponData.BurstCount; i++) 
+        if(!CheckAmmo())
         {
-            float spread = Random.Range(-weaponData.Spread, weaponData.Spread);
-            Vector3 fireDirection = Quaternion.Euler(0, spread, 0) * firePoint.forward;
+            if(_weaponData.DrawsFromReserve)
+            {
+                return; 
+            }
+            StartReload();
+            return;
+        }
 
-            Bullet bullet = Instantiate(weaponData.ProjectilePrefab, firePoint.position, firePoint.rotation).GetComponent<Bullet>();
+        for(int i = 0; i < _weaponData.BurstCount; i++) 
+        {
+            InitializeProjectile();           
+        }
+
+        //Decrease ammo count
+        if(_weaponData.DrawsFromReserve)
+        {
+            _currentReserve--;
+        }else
+        {
+            _currentMagazine--;
+        }
+
+
+        //Play muzzle flash if the weapon has one
+        if(muzzleFlash){muzzleFlash.Play();}
+
+        //Cooldown
+        CR_Cooldown = StartCoroutine(Cooldown(_weaponData.FireRate));
+
+        ShakeCamera();
+
+        OnDischarge?.Invoke();
+
+    }
+
+    void InitializeProjectile()
+    {
+        float spread = Random.Range(-_weaponData.Spread, _weaponData.Spread);
+        Vector3 fireDirection = Quaternion.Euler(0, spread, 0) * firePoint.forward;
+
+        GameObject bulletObject = projectilePool.GetObject(bulletObject =>
+        {
+            Bullet bullet = bulletObject.GetComponent<Bullet>();
+            bullet.objectIsPooled = true;
+            bullet.transform.SetPositionAndRotation(firePoint.position, firePoint.rotation);
             bullet.rigBody.velocity = fireDirection * bullet.speed;
-            bullet.lifetime = weaponData.ProjectileLifetime;
-            bullet.damagePayload = damagePayload;
-        }
+            bullet.lifetime = _weaponData.ProjectileLifetime;
+            bullet.damagePayload = damagePayload;        
+        });
 
-        if(muzzleFlash)
+    }
+
+
+    public void StartReload()
+    {
+        if(_weaponData.DrawsFromReserve) { return; }
+        if(CR_ReloadTimer != null) { return; } // if gun is already reloading, return
+        CR_ReloadTimer = StartCoroutine(ReloadTimer(_weaponData.ReloadDuration));
+    }
+
+    void Reload()
+    {
+        int requestedAmmo = _magazineCapacity - _currentMagazine;
+
+        if(requestedAmmo > _currentReserve)
         {
-            muzzleFlash.Play();
+            _currentMagazine += _currentReserve;
+            _currentReserve = 0;
+        }else
+        {
+            _currentMagazine = _magazineCapacity;
+            _currentReserve -= requestedAmmo;
         }
 
+        OnReload?.Invoke();
 
-        StartCoroutine(Cooldown(weaponData.FireRate));
+    }
+
+    protected IEnumerator ReloadTimer(float duration = 1)
+    {
+        if(CR_Cooldown != null)
+        {
+            StopCoroutine(CR_Cooldown);
+        }
+        canFire = false;
+
+        yield return new WaitForSeconds(duration);
+
+        Reload();
+        CR_ReloadTimer = null;
+
+        canFire = true;
+
+    }
+
+    public void RestoreAmmoToReserve(int amount)
+    {
+        _currentReserve += amount;
+        if(_currentReserve > _reserveCapacity)
+        {
+            _currentReserve = _reserveCapacity;
+        }
+    }
+
+    //Returns true if there is still ammo left, false otherwise.
+    protected bool CheckAmmo()
+    {
+        if(_weaponData.DrawsFromReserve)
+        {
+            if(_currentReserve <= 0)
+            {
+                return false;
+            }
+        }else
+        {
+            if(_currentMagazine <= 0)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
 
+    protected void ShakeCamera()
+    {
         if(cinemachineImpulseSource)
         {
             cinemachineImpulseSource.m_DefaultVelocity = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0);
 
-            cinemachineImpulseSource.m_ImpulseDefinition.m_ImpulseDuration = weaponData.CameraShakeDuration;
-            cinemachineImpulseSource.GenerateImpulseWithForce(weaponData.CameraShakeMagnitude);
+            cinemachineImpulseSource.m_ImpulseDefinition.m_ImpulseDuration = _weaponData.CameraShakeDuration;
+            cinemachineImpulseSource.GenerateImpulseWithForce(_weaponData.CameraShakeMagnitude);
         }
-
     }
-
-    public virtual void Reload(){}
 
 
     protected IEnumerator Cooldown(float duration)
@@ -98,6 +233,7 @@ public abstract class RangedWeapon : MonoBehaviour
         canFire = false;
         yield return new WaitForSeconds(duration);
         canFire = true;
+        CR_Cooldown = null;
     }
 
 
