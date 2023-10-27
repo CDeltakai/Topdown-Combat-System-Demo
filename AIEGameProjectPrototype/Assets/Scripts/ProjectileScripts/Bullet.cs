@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour, IPoolable
     Coroutine CR_SelfDestruct = null;
     public TrailRenderer trailRenderer { get; private set; }
 
-    private void Awake() 
+    protected virtual void Awake() 
     {
         rigBody = GetComponent<Rigidbody>();
         trailRenderer = GetComponent<TrailRenderer>();
@@ -28,19 +28,19 @@ public class Bullet : MonoBehaviour, IPoolable
 
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         CR_SelfDestruct = StartCoroutine(SelfDestruct(lifetime));
     }
 
-    private void FixedUpdate() 
+    protected virtual void FixedUpdate() 
     {
         //Move bullet with given velocity
         rigBody.MovePosition(rigBody.position + velocity * Time.fixedDeltaTime * speed);    
     }
 
     
-    private void OnCollisionEnter(Collision collision)
+    protected virtual void OnCollisionEnter(Collision collision)
     {
 
         if(collision.gameObject.CompareTag("Wall"))
@@ -76,7 +76,7 @@ public class Bullet : MonoBehaviour, IPoolable
 
 
 
-    IEnumerator SelfDestruct(float delay = 2)
+    protected IEnumerator SelfDestruct(float delay = 2)
     {
         yield return new WaitForSeconds(delay);
 

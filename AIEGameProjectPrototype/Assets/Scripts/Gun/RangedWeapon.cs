@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using JetBrains.Annotations;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public abstract class RangedWeapon : MonoBehaviour
 {
@@ -37,6 +39,8 @@ public abstract class RangedWeapon : MonoBehaviour
     GameObjectPool projectilePool;
 
     bool canFire = true;
+    bool infiniteAmmo = false;
+
     Coroutine CR_ReloadTimer = null;
     Coroutine CR_Cooldown = null;
 
@@ -74,9 +78,12 @@ public abstract class RangedWeapon : MonoBehaviour
         projectilePool = newProjectilePool.GetComponent<GameObjectPool>();
         projectilePool.prefab = _weaponData.ProjectilePrefab;
 
+        //Add some starting projectiles to the pool to smoothen gameplay
+        //If the weapon is full auto, it will add objects according to the weapon's fire rate and burst count
+        //to match the rate at which objects will be used.
         if(!_weaponData.FullAuto)
         {
-            projectilePool.AddObject(10); //Add some starting projectiles to the pool to smoothen gameplay
+            projectilePool.AddObject(10); 
         }else
         {
             projectilePool.AddObject((int)( 1 / _weaponData.FireRate * _weaponData.BurstCount));
@@ -87,17 +94,20 @@ public abstract class RangedWeapon : MonoBehaviour
 
     public virtual void PullTrigger()
     {
-
-        if(!canFire){ return; }
-        if(!CheckAmmo())
+        if(!infiniteAmmo)
         {
-            if(_weaponData.DrawsFromReserve)
+            if(!canFire){ return; }
+            if(!CheckAmmo())
             {
-                return; 
+                if(_weaponData.DrawsFromReserve)
+                {
+                    return; 
+                }
+                StartReload();
+                return;
             }
-            StartReload();
-            return;
         }
+
 
         for(int i = 0; i < _weaponData.BurstCount; i++) 
         {
@@ -105,13 +115,17 @@ public abstract class RangedWeapon : MonoBehaviour
         }
 
         //Decrease ammo count
-        if(_weaponData.DrawsFromReserve)
+        if(!infiniteAmmo)
         {
-            _currentReserve--;
-        }else
-        {
-            _currentMagazine--;
+            if(_weaponData.DrawsFromReserve)
+            {
+                _currentReserve--;
+            }else
+            {
+                _currentMagazine--;
+            }
         }
+
 
 
         //Play muzzle flash if the weapon has one
@@ -131,11 +145,11 @@ public abstract class RangedWeapon : MonoBehaviour
         float spread = Random.Range(-_weaponData.Spread, _weaponData.Spread);
         Vector3 fireDirection = Quaternion.Euler(0, spread, 0) * firePoint.forward;
 
-        GameObject bulletObject = projectilePool.GetObject(bulletObject =>
+        GameObject bulletObject = projectilePool.UseObject(bulletObject =>
         {
             Bullet bullet = bulletObject.GetComponent<Bullet>();
             bullet.objectIsPooled = true;
-            bullet.transform.SetPositionAndRotation(firePoint.position, firePoint.rotation);
+            bullet.transform.SetPositionAndRotation(firePoint.position, Quaternion.identity);
             bullet.rigBody.velocity = fireDirection * bullet.speed;
             bullet.lifetime = _weaponData.ProjectileLifetime;
             bullet.damagePayload = damagePayload;        

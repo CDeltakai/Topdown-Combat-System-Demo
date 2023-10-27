@@ -22,14 +22,14 @@ public class RangedWeaponDataSO : ScriptableObject
 
     [field:SerializeField] public DamagePayload Payload{ get; private set; }
 
-[Tooltip("The time delay between rounds fired. Higher = slower fire-rate. 0 means the player can fire the weapon as quickly as they click the mouse." +
+[Tooltip("The time delay in seconds before another round can be fired. Higher = slower fire-rate. 0 means the player can fire the weapon as quickly as they click the mouse." +
 " If the weapon is full auto, the minimum fire-rate will be set to 0.05f.")]
     [Range(0, 10)]
     [SerializeField] float _fireRate;
     public float FireRate{ get { 
         if(FullAuto && _fireRate < MINIMUM_FIRERATE)
         {
-            return 0.05f;
+            return MINIMUM_FIRERATE;
         }
         return _fireRate; } }
 
@@ -37,7 +37,7 @@ public class RangedWeaponDataSO : ScriptableObject
 
 [Tooltip("The number of shots the weapon fires on a single trigger pull.")]
     [Range(1, 50)]
-    [SerializeField] int _burstCount;
+    [SerializeField] int _burstCount = 1;
     public int BurstCount { get{ return _burstCount; } }
 
     [Min(0)]
@@ -45,13 +45,13 @@ public class RangedWeaponDataSO : ScriptableObject
     public int MagazineCapacity { get { return _magazineCapacity; }}
 
 
-[Tooltip("How long it takes for the weapon to reload")]
+[Tooltip("How long it takes for the weapon to reload in seconds.")]
     [Min(0)]
     [SerializeField] float _reloadDuration;
     public float ReloadDuration { get { return _reloadDuration; }}
 
 
-[Tooltip("Dictates whether the weapon draws munitions directly from its ammo reserve, ignoring magazine capacity.")]
+[Tooltip("Dictates whether the weapon draws munitions directly from its ammo reserve, ignoring magazine capacity. Also disables reloading if set to true.")]
     [SerializeField] bool _drawsFromReserve;
     public bool DrawsFromReserve { get { return _drawsFromReserve; }}
 

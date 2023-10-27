@@ -35,7 +35,7 @@ public class GameObjectPool : MonoBehaviour
         }
     }
 
-    public GameObject GetObject(SetUpObjectDelegate setupDelegate = null)
+    public GameObject UseObject(SetUpObjectDelegate setupDelegate = null)
     {
         GameObject instance;
         if(readyPool.Count  == 0)
@@ -52,7 +52,7 @@ public class GameObjectPool : MonoBehaviour
 
     }
 
-    public void ReadyObject(GameObject pooledObject)
+    void ReadyObject(GameObject pooledObject)
     {
         readyPool.Push(pooledObject);
     }

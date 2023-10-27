@@ -48,11 +48,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 5250270780804209217}
-  weaponData: {fileID: 11400000, guid: cb37e9581fda5ad40b267e3bb50ec6fa, type: 2}
+  _weaponData: {fileID: 11400000, guid: cb37e9581fda5ad40b267e3bb50ec6fa, type: 2}
   muzzleFlash: {fileID: 0}
-  projectile: {fileID: 5201850327758398847, guid: a160e4183996aa5429b4b501c1e28066,
-    type: 3}
-  damage: 1
+  _magazineCapacity: 0
+  _currentMagazine: 0
+  _reserveCapacity: 0
+  _currentReserve: 0
 --- !u!114 &1834052288
 MonoBehaviour:
   m_ObjectHideFlags: 0
