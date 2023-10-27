@@ -17,7 +17,7 @@ public class AmmoCounter : MonoBehaviour
         if(currentWeapon)
         {
             currentWeapon.OnDischarge += UpdateCounters;
-            currentWeapon.OnReload += UpdateCounters;
+            currentWeapon.OnFinishReload += UpdateCounters;
 
             UpdateCounters();
         }
@@ -32,12 +32,12 @@ public class AmmoCounter : MonoBehaviour
     public void ChangeWeapon(RangedWeapon rangedWeapon)
     {
         currentWeapon.OnDischarge -= UpdateCounters;
-        currentWeapon.OnReload -= UpdateCounters;
+        currentWeapon.OnFinishReload -= UpdateCounters;
 
         currentWeapon = rangedWeapon;
 
         currentWeapon.OnDischarge += UpdateCounters;
-        currentWeapon.OnReload += UpdateCounters;
+        currentWeapon.OnFinishReload += UpdateCounters;
 
         UpdateCounters();
 

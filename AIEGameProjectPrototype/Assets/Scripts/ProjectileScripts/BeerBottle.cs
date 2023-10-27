@@ -75,11 +75,13 @@ public class BeerBottle : Bullet
     IEnumerator ExplosionParticleTimer(float duration)
     {
         beerCollider.enabled = false;
-        
+        spinAnimator.enabled = false;
+        transform.rotation = Quaternion.identity;
+
         explosionParticleEffect.SetActive(true);
         meshRenderer.enabled = false;
         rigBody.isKinematic = true;
-        spinAnimator.enabled = false;
+
 
         yield return new WaitForSeconds(duration);
         explosionParticleEffect.SetActive(false);

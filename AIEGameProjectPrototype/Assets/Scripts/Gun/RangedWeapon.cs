@@ -12,8 +12,12 @@ public abstract class RangedWeapon : MonoBehaviour
     public delegate void DischargeWeaponEventHandler();
     public event DischargeWeaponEventHandler OnDischarge;
 
-    public delegate void ReloadWeaponEventHandler();
-    public event ReloadWeaponEventHandler OnReload;
+    public delegate void FinishReloadWeaponEventHandler();
+    public event FinishReloadWeaponEventHandler OnFinishReload;
+
+    public delegate void StartReloadWeaponEventHandler();
+    public event StartReloadWeaponEventHandler OnStartReload;
+
 
     [SerializeField] protected Transform firePoint;
     [SerializeField] protected RangedWeaponDataSO _weaponData;
@@ -162,6 +166,9 @@ public abstract class RangedWeapon : MonoBehaviour
     {
         if(_weaponData.DrawsFromReserve) { return; }
         if(CR_ReloadTimer != null) { return; } // if gun is already reloading, return
+        if(_currentMagazine == _magazineCapacity) { return; } // if gun is already full, return
+        
+        OnStartReload?.Invoke();
         CR_ReloadTimer = StartCoroutine(ReloadTimer(_weaponData.ReloadDuration));
     }
 
@@ -179,7 +186,7 @@ public abstract class RangedWeapon : MonoBehaviour
             _currentReserve -= requestedAmmo;
         }
 
-        OnReload?.Invoke();
+        OnFinishReload?.Invoke();
 
     }
 

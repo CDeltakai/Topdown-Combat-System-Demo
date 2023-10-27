@@ -277,7 +277,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _weaponData
       value: 
-      objectReference: {fileID: 11400000, guid: 65407d3943bba654b911d96d679a4859,
+      objectReference: {fileID: 11400000, guid: cb37e9581fda5ad40b267e3bb50ec6fa,
         type: 2}
     - target: {fileID: 5250270779742456601, guid: a5847f2dd94998941b64620e5d48962b,
         type: 3}
@@ -1883,13 +1883,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1381410513}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3ad5e7a5c56282448408b1a54843d4b, type: 3}
+  m_Script: {fileID: 11500000, guid: 72c9bf977c61bc6408307c2e1b034b0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentIntValue: 0
-  _currentFloatValue: 0
-  _maxIntValue: 0
-  _maxFloatValue: 0
+  currentWeapon: {fileID: 1834052287}
+  reloadingText: {fileID: 356490220}
+  maxHeight: 5
+  animateDuration: 5
 --- !u!1001 &1402827283
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2124,7 +2124,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1719984796}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14ad645eea21e514ea822f6123c5294a, type: 3}
   m_Name: 
