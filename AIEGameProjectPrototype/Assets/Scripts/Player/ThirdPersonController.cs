@@ -127,6 +127,8 @@ namespace StarterAssets
         }
 
 
+        
+
         [SerializeField] Gun currentGun;
 
 
@@ -172,6 +174,16 @@ namespace StarterAssets
             Move();
 
             PlayerContainer.position = gameObject.transform.position;
+
+            if(currentGun.WeaponData.FullAuto)
+            {
+                if(Mouse.current.leftButton.isPressed)
+                {
+                    OnShoot();
+                }
+            }
+
+
         }
 
         private void LateUpdate()
