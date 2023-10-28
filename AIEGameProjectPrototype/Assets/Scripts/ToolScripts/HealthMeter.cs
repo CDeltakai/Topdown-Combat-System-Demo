@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// A flexible and modular health and damage meter + system that can be attached to any object and referenced in order to track
+/// the HP of some object.
+/// </summary>
 public class HealthMeter : MonoBehaviour
 {
     public delegate void ShieldHPChangedHandler(int oldValue, int newValue);
@@ -21,15 +25,20 @@ public class HealthMeter : MonoBehaviour
     public event HPFullEventHandler OnHPFull;
 
 [Tooltip("Whether this health meter can take damage.")]
-    public bool invincible = false;
+    public bool canTakeDamage = true;
 
+[Tooltip("Whether this health meter will self-disable after being depleted.")]
+    public bool disableAfterDepletion = false;
+
+[Tooltip("If false, object will not react to method calls.")]
+    [SerializeField] bool isActive = true;
 
     [Min(0)]
     [SerializeField] int _currentHP = 100;
     //Publically accessible property for currentHP that when set, will set the value of the private currentHP value and raise the OnHPChanged event.
     public int CurrentHP {
         get{return _currentHP;}
-        set
+        private set
         {
             if(_currentHP != value)
             {
@@ -54,7 +63,7 @@ public class HealthMeter : MonoBehaviour
     //Publically accessible property for shieldHP that when set, will set the value of the private shieldHP value and raise the OnShieldHPChanged event.
     public int ShieldHP {
         get{return _shieldHP;}
-        set
+        private set
         {
             if(_shieldHP != value)
             {
@@ -81,20 +90,31 @@ public class HealthMeter : MonoBehaviour
             _maxHP = _currentHP;
         }
 
+        if(disableAfterDepletion)
+        {
+            OnHPDepleted += SelfDisable;
+        }
 
     }
 
 
+/// <summary>
+/// Deal damage to the HealthMeter. If the HealthMeter has ShieldHP, the ShieldHP takes damage before the CurrentHP.
+/// </summary>
+/// <param name="payload"></param>
     public void Hurt(DamagePayload payload)
     {
-        if(invincible){return;}
+        if(!isActive){ return; }
+        if(!canTakeDamage){return;}
 
         DamagePayload finalPayload = payload;
+        finalPayload.baseDamage = Math.Abs(payload.baseDamage);
 
         int damageAfterModifiers;
         int originalShieldHP = ShieldHP;
         bool wentThroughShields = false;
 
+        //Calculate damage for Shields
         ShieldHP -= finalPayload.baseDamage;
         if(_shieldHP < 0)
         {
@@ -104,13 +124,13 @@ public class HealthMeter : MonoBehaviour
             {
                 wentThroughShields = true;
             }
-            
         }else
         {
             damageAfterModifiers = 0;
             OnDamageTaken?.Invoke(finalPayload.baseDamage);   
         }
 
+        //Damage calculations
         if(damageAfterModifiers != 0)
         {
             damageAfterModifiers = (int)(damageAfterModifiers * ((100 - armor) * 0.01) * defenseMultiplier);
@@ -130,10 +150,12 @@ public class HealthMeter : MonoBehaviour
             _currentHP = 0;
         }
 
-
     }
     public void Hurt(int damage)
     {
+        if(!isActive){ return; }
+        if(!canTakeDamage){return;}        
+
         DamagePayload tempPayload = new DamagePayload()
         {
             baseDamage = damage
@@ -141,8 +163,31 @@ public class HealthMeter : MonoBehaviour
         Hurt(tempPayload);
     }
 
-    public void RestoreHP(int amount)
+
+    void SelfDisable()
     {
+        if(disableAfterDepletion)
+        {
+            isActive = false;
+        }
+    }
+
+
+/// <summary>
+/// Restore a given amount of HP to CurrentHP. Cannot restore above MaxHP. If given 0 or no value, will restore meter to full.
+/// </summary>
+/// <param name="amount"></param>
+    public void RestoreHP(int amount = 0)
+    {
+        if(!isActive){ return; }        
+
+        if(amount == 0)
+        {
+            _currentHP = _maxHP;
+            OnHPFull?.Invoke();
+            return;
+        }
+
         if(_currentHP + amount >= _maxHP)
         {
             CurrentHP = _maxHP;
@@ -153,5 +198,27 @@ public class HealthMeter : MonoBehaviour
         }
     }
 
+/// <summary>
+/// Sets the max HP of the meter. If given value is less than current HP but not less than or equal to 0, will set max HP to current HP.
+/// If given value is less than or equal to 0, will do nothing.
+/// </summary>
+/// <param name="amount"></param>
+    public void SetMaxHP(int amount)
+    {
+        if(!isActive){ return; }        
+
+        if(amount <= 0)
+        {
+            return;
+        }
+
+        if(amount < _currentHP)
+        {
+            _maxHP = _currentHP;
+        }else
+        {
+            _maxHP = amount;
+        }
+    }
 
 }

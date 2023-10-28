@@ -9810,7 +9810,7 @@ GameObject:
   - component: {fileID: 6946198022130776057}
   - component: {fileID: 6944778871153719957}
   m_Layer: 0
-  m_Name: BeerBottleExplosion
+  m_Name: BeerBottleExplosionVFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

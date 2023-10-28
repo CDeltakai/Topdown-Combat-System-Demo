@@ -13,6 +13,12 @@ public class SpawnManager : MonoBehaviour
     public float minDistanceFromPlayer = 10f;
     public float maxDistanceFromPlayer = 20f;
 
+    void Awake()
+    {
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 120;
+    }
+
     void Start()
     {
         

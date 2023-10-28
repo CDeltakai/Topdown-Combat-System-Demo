@@ -4,6 +4,9 @@ using Cinemachine;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+/// <summary>
+/// Base class that handles generic functionality of a ranged weapon.
+/// </summary>
 public abstract class RangedWeapon : MonoBehaviour
 {
     public delegate void DischargeWeaponEventHandler();
@@ -15,12 +18,12 @@ public abstract class RangedWeapon : MonoBehaviour
     public delegate void StartReloadWeaponEventHandler();
     public event StartReloadWeaponEventHandler OnStartReload;
 
-
+[Tooltip("The point where projectiles will be spawned from.")]
     [SerializeField] protected Transform firePoint;
     [SerializeField] protected RangedWeaponDataSO _weaponData;
     public RangedWeaponDataSO WeaponData {get{ return _weaponData; }}
 
-    [SerializeField] ParticleSystem muzzleFlash;
+    ParticleSystem muzzleFlash;
     protected DamagePayload damagePayload;
     protected CinemachineImpulseSource cinemachineImpulseSource;
 
@@ -37,11 +40,12 @@ public abstract class RangedWeapon : MonoBehaviour
     [SerializeField] protected int _currentReserve;
     public int CurrentReserve{get{ return _currentReserve; }}
 
-    GameObjectPool projectilePool;
-
-    bool canFire = true;
+[Tooltip("If set to true, the weapon will be able to fire regardless of ammo and will not consume ammo.")]
     public bool infiniteAmmo = false;
 
+
+    GameObjectPool projectilePool;
+    bool canFire = true;
     Coroutine CR_ReloadTimer = null;
     Coroutine CR_Cooldown = null;
 
@@ -84,7 +88,7 @@ public abstract class RangedWeapon : MonoBehaviour
         //to match the rate at which objects will be used.
         if(!_weaponData.FullAuto)
         {
-            //10 is the average Clicks per Second for most players, thus is a good approximate for how many objects to add at the start
+            //10 is the average Clicks Per Second for most players, thus is a good approximate for how many objects to add at the start.
             projectilePool.AddObject(10 * _weaponData.BurstCount); 
         }else
         {
@@ -139,7 +143,7 @@ public abstract class RangedWeapon : MonoBehaviour
 
     }
 
-    void InitializeProjectile()
+    protected virtual void InitializeProjectile()
     {
         float spread = Random.Range(-_weaponData.Spread, _weaponData.Spread);
         Vector3 fireDirection = Quaternion.Euler(0, spread, 0) * firePoint.forward;

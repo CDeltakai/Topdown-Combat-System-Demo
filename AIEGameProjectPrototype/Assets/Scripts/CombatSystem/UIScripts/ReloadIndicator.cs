@@ -20,9 +20,9 @@ public class ReloadIndicator : MonoBehaviour
 
     void Awake()
     {
+        reloadBarSprite = GetComponent<SpriteRenderer>();
         if(reloadBarSprite)
         {
-            reloadBarSprite = GetComponent<SpriteRenderer>();
             reloadBarSprite.enabled = false;
             reloadingText.enabled = false;
         }
@@ -51,7 +51,6 @@ public class ReloadIndicator : MonoBehaviour
         currentWeapon = weapon;
 
         currentWeapon.OnStartReload += BeginAnimateBar;
-
     }
 
     void CancelAnimation()

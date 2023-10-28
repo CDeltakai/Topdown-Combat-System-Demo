@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// A weapon management system that allows usage of any number of weapons with selection capabilities.
+/// </summary>
 public class WeaponHolder : MonoBehaviour
 {
     public delegate void ScrollWeaponEventHandler(RangedWeapon weapon);

@@ -162,7 +162,13 @@ namespace StarterAssets
 
         private void FixedUpdate() 
         {
-            
+            if(weaponHolder.CurrentWeapon.WeaponData.FullAuto)
+            {
+                if(Mouse.current.leftButton.isPressed)
+                {
+                    OnShoot();
+                }
+            }            
         }
 
         private void Update()
@@ -175,13 +181,7 @@ namespace StarterAssets
 
             PlayerContainer.position = gameObject.transform.position;
 
-            if(weaponHolder.CurrentWeapon.WeaponData.FullAuto)
-            {
-                if(Mouse.current.leftButton.isPressed)
-                {
-                    OnShoot();
-                }
-            }
+
 
 
         }

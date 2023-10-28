@@ -2,9 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// An object pool system meant for prefabs that implement the IPoolable interface.
+/// </summary>
 public class GameObjectPool : MonoBehaviour
 {
-
+    /// <summary>
+    /// A delegate that can be used to set up an object before it is activated. Useful for situations where your object needs to be initialized
+    /// with fresh values before being activated.
+    /// </summary>
+    /// <param name="pooledObject"></param>
     public delegate void SetUpObjectDelegate(GameObject pooledObject);
 
     public GameObject prefab; // the prefab to instantiate

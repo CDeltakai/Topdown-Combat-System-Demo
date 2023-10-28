@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Base class for projectiles of all kinds which also implements IPoolable and thus usable within the GameObjectPool class
+/// for optimization purposes.
+/// </summary>
+[RequireComponent(typeof(Rigidbody))]
 public class Bullet : MonoBehaviour, IPoolable
 {
     public bool objectIsPooled;
@@ -71,7 +76,7 @@ public class Bullet : MonoBehaviour, IPoolable
                 }
             }
         }
-
+        
     }
 
 

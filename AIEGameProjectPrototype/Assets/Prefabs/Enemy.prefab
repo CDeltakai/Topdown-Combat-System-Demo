@@ -305,7 +305,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8f36afff336332479257b9f4df486cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  invincible: 0
+  canTakeDamage: 1
+  disableAfterDepletion: 1
+  isActive: 1
   _currentHP: 100
   _maxHP: 100
   _shieldHP: 0
