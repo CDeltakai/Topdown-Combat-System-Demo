@@ -81,7 +81,7 @@ public class Bullet : MonoBehaviour, IPoolable
 
 
 
-    protected IEnumerator SelfDestruct(float delay = 2)
+    protected virtual IEnumerator SelfDestruct(float delay = 2)
     {
         yield return new WaitForSeconds(delay);
 
@@ -95,8 +95,14 @@ public class Bullet : MonoBehaviour, IPoolable
 
     }
 
-    public void ActivateObject()
+    //Empty virtual methods that can be overridden and will be called before either the rest of ActivateObject or DisableObject is run. 
+    protected virtual void AdditionalActivationOperations(){}
+    protected virtual void AdditionalDisableOperations(){}
+
+    public virtual void ActivateObject()
     {
+        AdditionalActivationOperations();
+
         gameObject.SetActive(true);
 
         if (trailRenderer) 
@@ -115,8 +121,10 @@ public class Bullet : MonoBehaviour, IPoolable
         OnActivateObject?.Invoke(gameObject);
     }
 
-    public void DisableObject()
+    public virtual void DisableObject()
     {
+        AdditionalDisableOperations();
+
         if(CR_SelfDestruct != null)
         {
             StopCoroutine(CR_SelfDestruct);

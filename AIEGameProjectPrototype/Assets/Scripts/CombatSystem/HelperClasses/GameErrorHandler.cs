@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Static class that provides methods for common error handling behaviours. When utilised properly, improves robustness
+/// of our game and reduces possibility of crashes.
+/// </summary>
 public static class GameErrorHandler
 {
 

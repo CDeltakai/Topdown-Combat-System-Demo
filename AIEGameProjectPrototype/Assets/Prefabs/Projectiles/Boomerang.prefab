@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 4406846682558096032}
   - component: {fileID: 7403766719056413645}
   - component: {fileID: 5945529284108198544}
-  - component: {fileID: 6759934046876332092}
   - component: {fileID: 6921679006361898718}
   - component: {fileID: 6810226259127677966}
+  - component: {fileID: 7181705416939427503}
+  - component: {fileID: 7181705416939427510}
   m_Layer: 0
   m_Name: Boomerang
   m_TagString: Untagged
@@ -195,26 +196,6 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
---- !u!114 &6759934046876332092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5491042035206134494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c877a18a4c69f749a572271555a98b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectIsPooled: 0
-  lifetime: 2
-  damagePayload:
-    baseDamage: 0
-    damageType: 0
-    attacker: {fileID: 0}
-  speed: 75
-  velocity: {x: 0, y: 0, z: 0}
 --- !u!54 &6921679006361898718
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -224,8 +205,8 @@ Rigidbody:
   m_GameObject: {fileID: 5491042035206134494}
   serializedVersion: 2
   m_Mass: 0.0000001
-  m_Drag: 0
-  m_AngularDrag: 0
+  m_Drag: 0.5
+  m_AngularDrag: 0.5
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -244,3 +225,48 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.99999994, y: 1, z: 0.99999994}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7181705416939427503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5491042035206134494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1bdf6c4861cdc41b95834d328bcd65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectIsPooled: 1
+  lifetime: 20
+  damagePayload:
+    baseDamage: 0
+    damageType: 0
+    attacker: {fileID: 0}
+  speed: 30
+  velocity: {x: 0, y: 0, z: 0}
+  shooter: {fileID: 0}
+  maxDistance: 30
+  maxFlightTime: 3
+  returnCurveHeight: 5
+--- !u!95 &7181705416939427510
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5491042035206134494}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3f2df0d6521c3c643899969329c575ac, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

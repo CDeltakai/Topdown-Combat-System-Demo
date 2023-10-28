@@ -2225,7 +2225,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1719984796}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14ad645eea21e514ea822f6123c5294a, type: 3}
   m_Name: 
@@ -2266,6 +2266,15 @@ PrefabInstance:
       propertyPath: cameraPosition
       value: 
       objectReference: {fileID: 1073098072}
+    - target: {fileID: 2014778082, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+      propertyPath: weaponsToSpawn.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2014778082, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+      propertyPath: weaponsToSpawn.Array.data[3]
+      value: 
+      objectReference: {fileID: 5250270779742456606, guid: 8d1accfa2f9c93b458fb922fb2db6833,
+        type: 3}
     - target: {fileID: 3893294197879345259, guid: 64dce48905ffd9b4293e595fa6941544,
         type: 3}
       propertyPath: m_RootOrder
@@ -3423,6 +3432,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Boomerang
+      objectReference: {fileID: 0}
+    - target: {fileID: 5491042035206134494, guid: ebcf9a7a0e8a03a43a08fb79894257e0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ebcf9a7a0e8a03a43a08fb79894257e0, type: 3}

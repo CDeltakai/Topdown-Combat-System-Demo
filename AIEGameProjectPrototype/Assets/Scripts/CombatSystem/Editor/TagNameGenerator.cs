@@ -2,6 +2,12 @@ using UnityEditor;
 using System.IO;
 using System.Text;
 
+
+/// <summary>
+/// Looks through all the tags in the project and dynamically generates an enum which contains the names of all the
+/// tags in the project. Allows comparing of tags using enums rather than manually typed strings, which is both 
+/// error-prone and inflexible.
+/// </summary>
 public class TagNameGenerator
 {
     private const string EnumName = "TagNames";

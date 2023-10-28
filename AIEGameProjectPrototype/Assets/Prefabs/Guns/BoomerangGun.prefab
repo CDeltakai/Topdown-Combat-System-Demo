@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5250270779742456601}
-  - component: {fileID: 4923314673031834329}
   - component: {fileID: 1834052288}
+  - component: {fileID: 3989802896517512525}
   m_Layer: 0
-  m_Name: Gun
+  m_Name: BoomerangGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,25 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4923314673031834329
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5250270779742456606}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 873e59519bf8b434980652ddd0db72ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firePoint: {fileID: 5250270780804209217}
-  _weaponData: {fileID: 11400000, guid: cb37e9581fda5ad40b267e3bb50ec6fa, type: 2}
-  _magazineCapacity: 0
-  _currentMagazine: 0
-  _reserveCapacity: 0
-  _currentReserve: 0
-  infiniteAmmo: 0
 --- !u!114 &1834052288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,6 +88,25 @@ MonoBehaviour:
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: 0.5, y: 0.5, z: 0}
+--- !u!114 &3989802896517512525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5250270779742456606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21a89725067d10d4dad2bccf1d706378, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePoint: {fileID: 5250270780804209217}
+  _weaponData: {fileID: 11400000, guid: b21399cef8cc47648b54675e4bb6b7fc, type: 2}
+  _magazineCapacity: 0
+  _currentMagazine: 0
+  _reserveCapacity: 0
+  _currentReserve: 0
+  infiniteAmmo: 0
 --- !u!1 &5250270780804209222
 GameObject:
   m_ObjectHideFlags: 0
