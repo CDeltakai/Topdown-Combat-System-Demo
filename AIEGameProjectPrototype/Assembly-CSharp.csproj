@@ -129,6 +129,8 @@
     <Compile Include="Assets\UnityTechnologies\ParticlePack\EffectExamples\Misc Effects\Scripts\SpawnEffect.cs" />
     <Compile Include="Assets\Scripts\CombatSystem\UIScripts\AmmoCounter.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
+    <Compile Include="Assets\Scripts\CombatSystem\HelperClasses\GameErrorHandler.cs" />
+    <Compile Include="Assets\Scripts\CombatSystem\HelperClasses\VectorDirections.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
