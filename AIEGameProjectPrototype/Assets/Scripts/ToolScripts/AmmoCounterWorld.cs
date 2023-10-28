@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class AmmoCounter : MonoBehaviour
+public class AmmoCounterWorld : MonoBehaviour
 {
     [SerializeField] RangedWeapon currentWeapon;
 
-    [SerializeField] TextMeshProUGUI magazineCount;
-    [SerializeField] TextMeshProUGUI reserveCount;
+    [SerializeField] TextMeshPro magazineCount;
+    [SerializeField] TextMeshPro reserveCount;
 
 
     void Start()
@@ -57,5 +57,4 @@ public class AmmoCounter : MonoBehaviour
 
 
     }
-
 }

@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
-using JetBrains.Annotations;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -87,7 +84,8 @@ public abstract class RangedWeapon : MonoBehaviour
         //to match the rate at which objects will be used.
         if(!_weaponData.FullAuto)
         {
-            projectilePool.AddObject(10); 
+            //10 is the average Clicks per Second for most players, thus is a good approximate for how many objects to add at the start
+            projectilePool.AddObject(10 * _weaponData.BurstCount); 
         }else
         {
             projectilePool.AddObject((int)( 1 / _weaponData.FireRate * _weaponData.BurstCount));
@@ -167,7 +165,8 @@ public abstract class RangedWeapon : MonoBehaviour
         if(_weaponData.DrawsFromReserve) { return; }
         if(CR_ReloadTimer != null) { return; } // if gun is already reloading, return
         if(_currentMagazine == _magazineCapacity) { return; } // if gun is already full, return
-        
+        if(_currentReserve <= 0 ) { return; }
+
         OnStartReload?.Invoke();
         CR_ReloadTimer = StartCoroutine(ReloadTimer(_weaponData.ReloadDuration));
     }

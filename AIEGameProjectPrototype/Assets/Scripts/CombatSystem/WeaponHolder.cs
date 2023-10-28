@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class WeaponHolder : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] List<RangedWeapon> weaponsToSpawn = new List<RangedWeapon>();
+
+    [SerializeField] List<RangedWeapon> weaponsInScene = new List<RangedWeapon>();
+    [SerializeField] RangedWeapon currentWeapon;
+
+
+
+
     void Start()
     {
         
