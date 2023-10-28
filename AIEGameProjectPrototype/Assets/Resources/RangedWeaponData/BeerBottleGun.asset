@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weaponName: Beer Bottle
   <Payload>k__BackingField:
-    baseDamage: 30
+    baseDamage: 50
     damageType: 0
     attacker: {fileID: 0}
   _fireRate: 0

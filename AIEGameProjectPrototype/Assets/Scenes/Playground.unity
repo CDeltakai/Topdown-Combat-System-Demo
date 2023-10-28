@@ -277,7 +277,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _weaponData
       value: 
-      objectReference: {fileID: 11400000, guid: cb37e9581fda5ad40b267e3bb50ec6fa,
+      objectReference: {fileID: 11400000, guid: 65407d3943bba654b911d96d679a4859,
         type: 2}
     - target: {fileID: 5250270779742456601, guid: a5847f2dd94998941b64620e5d48962b,
         type: 3}
@@ -3830,6 +3830,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Wall
       objectReference: {fileID: 0}
+    - target: {fileID: 3019802357415506049, guid: 09aade0ecefd01e4b8f7661acf64f5c2,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 3297709168547847191, guid: 09aade0ecefd01e4b8f7661acf64f5c2,
         type: 3}
       propertyPath: m_TagString
@@ -3914,6 +3919,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7436408284486996600, guid: 09aade0ecefd01e4b8f7661acf64f5c2,
+        type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 7690497447382159287, guid: 09aade0ecefd01e4b8f7661acf64f5c2,
         type: 3}

@@ -57,10 +57,10 @@ public class Bullet : MonoBehaviour, IPoolable
 
         if(collision.gameObject.CompareTag("Enemy"))
         {
-            Entity entity = collision.gameObject.GetComponent<Entity>();
-            if(entity)
+            HealthMeter targetHealth = collision.gameObject.GetComponent<HealthMeter>();
+            if(targetHealth)
             {
-                entity.HurtEntity(damagePayload.baseDamage);
+                targetHealth.Hurt(damagePayload.baseDamage);
 
                 if(objectIsPooled)
                 {

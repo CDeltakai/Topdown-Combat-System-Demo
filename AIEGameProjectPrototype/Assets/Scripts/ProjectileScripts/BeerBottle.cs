@@ -1,6 +1,7 @@
+using System.Collections.ObjectModel;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using Cinemachine;
 using UnityEngine;
 
 public class BeerBottle : Bullet
@@ -14,6 +15,7 @@ public class BeerBottle : Bullet
 
     [SerializeField] GameObject explosionParticleEffect;
 
+    CinemachineImpulseSource impulseSource;
     CapsuleCollider beerCollider;
     Animator spinAnimator;
     MeshRenderer meshRenderer;
@@ -25,12 +27,13 @@ public class BeerBottle : Bullet
         spinAnimator = GetComponent<Animator>();
         meshRenderer = GetComponent<MeshRenderer>();
         beerCollider = GetComponent<CapsuleCollider>();
+        impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
 
     protected override void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Wall"))
+        if(collision.gameObject.CompareTag("Wall") )
         {
 
             ExplodeHits(explosionRadius.transform.position);
@@ -57,10 +60,10 @@ public class BeerBottle : Bullet
 
         foreach(var hitCollder in hitColliders)
         {
-            Entity entity = hitCollder.GetComponent<Entity>();
-            if(entity && entity.CompareTag("Enemy"))
+            HealthMeter targetHealth = hitCollder.GetComponent<HealthMeter>();
+            if(targetHealth && targetHealth.CompareTag("Enemy"))
             {
-                entity.HurtEntity(damagePayload.baseDamage);
+                targetHealth.Hurt(damagePayload.baseDamage);
             }
         }
     }
@@ -82,6 +85,7 @@ public class BeerBottle : Bullet
         meshRenderer.enabled = false;
         rigBody.isKinematic = true;
 
+        if (impulseSource) { impulseSource.GenerateImpulseWithForce(0.1f); };
 
         yield return new WaitForSeconds(duration);
         explosionParticleEffect.SetActive(false);

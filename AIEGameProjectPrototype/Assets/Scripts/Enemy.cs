@@ -5,9 +5,16 @@ using UnityEngine.AI;
 
 public class Enemy : Entity
 {
-
     public Transform player; // Reference to the player's transform
     private NavMeshAgent agent; // Reference to the NavMeshAgent
+
+    [SerializeField] HealthMeter health;
+
+    void Awake()
+    {
+        health = GetComponent<HealthMeter>();
+        health.OnHPDepleted += DestroyEntity;
+    }
 
     private void Start()
     {
