@@ -4,22 +4,75 @@ using UnityEngine;
 
 public class WeaponHolder : MonoBehaviour
 {
-    [SerializeField] List<RangedWeapon> weaponsToSpawn = new List<RangedWeapon>();
+    public delegate void ScrollWeaponEventHandler(RangedWeapon weapon);
+    public event ScrollWeaponEventHandler OnScrollWeapon;
 
+    [SerializeField] List<GameObject> weaponsToSpawn = new List<GameObject>();
     [SerializeField] List<RangedWeapon> weaponsInScene = new List<RangedWeapon>();
-    [SerializeField] RangedWeapon currentWeapon;
 
+    [SerializeField] RangedWeapon _currentWeapon;
+    public RangedWeapon CurrentWeapon {get{ return _currentWeapon; }}
 
+    int currentWeaponIndex;
 
-
-    void Start()
+    void Awake()
     {
-        
+        foreach(var weaponPrefab in weaponsToSpawn)
+        {
+            if(weaponPrefab.GetComponent<RangedWeapon>() != null)
+            {
+                RangedWeapon weaponInstance = Instantiate(weaponPrefab, transform).GetComponent<RangedWeapon>();
+                weaponPrefab.SetActive(false);
+                weaponsInScene.Add(weaponInstance);
+            }else
+            {
+                Debug.LogWarning("A prefab: " + weaponPrefab.name + " does not have a RangedWeapon component attached, skipped instantiation.");
+                continue;
+            }
+        }
+
+        if(weaponsInScene.Count > 0)
+        {
+            _currentWeapon = weaponsInScene[0];
+            _currentWeapon.gameObject.SetActive(true);
+            currentWeaponIndex = 0;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+
+
+    public void ScrollWeaponForward()
     {
-        
+        if(weaponsInScene.Count <= 1) { return; }
+
+        currentWeaponIndex++;
+
+        if(currentWeaponIndex >= weaponsInScene.Count)
+        {
+            currentWeaponIndex = 0;
+
+            _currentWeapon.StopOperations();
+
+            _currentWeapon.gameObject.SetActive(false);
+            _currentWeapon = weaponsInScene[currentWeaponIndex];
+            _currentWeapon.gameObject.SetActive(true);
+
+            OnScrollWeapon?.Invoke(_currentWeapon);
+
+        }else
+        {
+            _currentWeapon.StopOperations();
+
+            _currentWeapon.gameObject.SetActive(false);
+            _currentWeapon = weaponsInScene[currentWeaponIndex];
+            _currentWeapon.gameObject.SetActive(true);
+
+            OnScrollWeapon?.Invoke(_currentWeapon);
+        }
+
+
+
     }
+
+
 }

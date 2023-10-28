@@ -7,10 +7,12 @@ public class AimController : MonoBehaviour
 {
     [SerializeField] Camera cameraPosition;
     [SerializeField] GameObject reticle;
+
+[Tooltip("The speed at which the object rotates towards the mouse.")]    
     [SerializeField] float rotationSpeed = 7;
 
     [SerializeField] Transform aimpointTransform;
-    [SerializeField] float staticElevation;
+
 
 
     void Update()

@@ -127,8 +127,8 @@ namespace StarterAssets
         }
 
 
-        
 
+        [SerializeField] WeaponHolder weaponHolder;
         [SerializeField] Gun currentGun;
 
 
@@ -175,7 +175,7 @@ namespace StarterAssets
 
             PlayerContainer.position = gameObject.transform.position;
 
-            if(currentGun.WeaponData.FullAuto)
+            if(weaponHolder.CurrentWeapon.WeaponData.FullAuto)
             {
                 if(Mouse.current.leftButton.isPressed)
                 {
@@ -312,14 +312,20 @@ namespace StarterAssets
 
         void OnShoot()
         {
-            currentGun.PullTrigger();
+            weaponHolder.CurrentWeapon.PullTrigger();
+            //currentGun.PullTrigger();
         }
 
         void OnReload()
         {
-            currentGun.StartReload();
+            weaponHolder.CurrentWeapon.StartReload();
+            //currentGun.StartReload();
         }
 
+        void OnScrollWeapon()
+        {
+            weaponHolder.ScrollWeaponForward();
+        }
 
         private void JumpAndGravity()
         {

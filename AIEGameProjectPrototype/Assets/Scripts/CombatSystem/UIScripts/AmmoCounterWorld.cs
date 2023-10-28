@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class AmmoCounterWorld : MonoBehaviour
 {
+    public WeaponHolder weaponHolder;
     [SerializeField] RangedWeapon currentWeapon;
 
     [SerializeField] TextMeshPro magazineCount;
@@ -13,19 +14,32 @@ public class AmmoCounterWorld : MonoBehaviour
 
     void Start()
     {
-        if(currentWeapon)
-        {
-            currentWeapon.OnDischarge += UpdateCounters;
-            currentWeapon.OnFinishReload += UpdateCounters;
+        InitializeWeaponHolder();
 
-            UpdateCounters();
-        }
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void InitializeWeaponHolder()
+    {
+        if(weaponHolder)
+        {
+            currentWeapon = weaponHolder.CurrentWeapon;
+
+            currentWeapon.OnDischarge += UpdateCounters;
+            currentWeapon.OnFinishReload += UpdateCounters;
+
+            weaponHolder.OnScrollWeapon += ChangeWeapon;
+
+            UpdateCounters();            
+        }else
+        {
+            Debug.LogWarning("No weapon holder set, ammo counter will not function.");
+        }        
     }
 
     public void ChangeWeapon(RangedWeapon rangedWeapon)

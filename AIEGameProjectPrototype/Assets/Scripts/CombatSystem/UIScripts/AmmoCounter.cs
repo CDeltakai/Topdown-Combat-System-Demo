@@ -2,30 +2,46 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AmmoCounter : MonoBehaviour
 {
-    [SerializeField] RangedWeapon currentWeapon;
 
+    [SerializeField] WeaponHolder weaponHolder;
+    RangedWeapon currentWeapon;
+
+    [SerializeField] TextMeshProUGUI weaponName;
     [SerializeField] TextMeshProUGUI magazineCount;
     [SerializeField] TextMeshProUGUI reserveCount;
 
 
     void Start()
     {
-        if(currentWeapon)
-        {
-            currentWeapon.OnDischarge += UpdateCounters;
-            currentWeapon.OnFinishReload += UpdateCounters;
-
-            UpdateCounters();
-        }
+        InitializeWeaponHolder();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void InitializeWeaponHolder()
+    {
+        if(weaponHolder)
+        {
+            currentWeapon = weaponHolder.CurrentWeapon;
+
+            currentWeapon.OnDischarge += UpdateCounters;
+            currentWeapon.OnFinishReload += UpdateCounters;
+
+            weaponHolder.OnScrollWeapon += ChangeWeapon;
+
+            UpdateCounters();            
+        }else
+        {
+            Debug.LogWarning("No weapon holder set, ammo counter will not function.");
+        }        
     }
 
     public void ChangeWeapon(RangedWeapon rangedWeapon)
@@ -38,6 +54,8 @@ public class AmmoCounter : MonoBehaviour
         currentWeapon.OnDischarge += UpdateCounters;
         currentWeapon.OnFinishReload += UpdateCounters;
 
+        if(weaponName) { weaponName.text = currentWeapon.WeaponData.WeaponName; }
+
         UpdateCounters();
 
     }
@@ -45,6 +63,8 @@ public class AmmoCounter : MonoBehaviour
 
     void UpdateCounters()
     {
+        
+
         if(currentWeapon.WeaponData.DrawsFromReserve)
         {
             if(magazineCount) { magazineCount.text = currentWeapon.CurrentReserve.ToString(); }

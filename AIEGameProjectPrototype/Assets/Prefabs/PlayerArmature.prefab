@@ -31,6 +31,56 @@ Transform:
   m_Father: {fileID: 3893294197879345259}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2014778080
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2014778081}
+  - component: {fileID: 2014778082}
+  m_Layer: 8
+  m_Name: WeaponHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2014778081
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2014778080}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3893294197879345259}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2014778082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2014778080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 100814b36036a494f904496cd97ea937, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponsToSpawn:
+  - {fileID: 5250270779742456606, guid: a5847f2dd94998941b64620e5d48962b, type: 3}
+  - {fileID: 884086350909531166, guid: ddf73cbab824ed64b8eb6a2d265920b5, type: 3}
+  - {fileID: 3999659772212556940, guid: 129869c61a517914da364941dfaf2491, type: 3}
+  weaponsInScene: []
+  _currentWeapon: {fileID: 0}
 --- !u!1 &122036865199361367
 GameObject:
   m_ObjectHideFlags: 0
@@ -1093,6 +1143,7 @@ Transform:
   - {fileID: 272993188807782130}
   - {fileID: 5250270781497538056}
   - {fileID: 598536465}
+  - {fileID: 2014778081}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1180,6 +1231,7 @@ MonoBehaviour:
   CameraAngleOverride: 0
   LockCameraPosition: 1
   PlayerContainer: {fileID: 0}
+  weaponHolder: {fileID: 2014778082}
   currentGun: {fileID: 4923314673432631240}
 --- !u!114 &5885216827943657505
 MonoBehaviour:
@@ -2818,6 +2870,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5250270779742456606, guid: a5847f2dd94998941b64620e5d48962b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5250270780804209222, guid: a5847f2dd94998941b64620e5d48962b,
         type: 3}

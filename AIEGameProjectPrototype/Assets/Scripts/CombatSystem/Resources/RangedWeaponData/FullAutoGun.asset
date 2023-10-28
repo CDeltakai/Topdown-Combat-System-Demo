@@ -10,25 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f7618be28367744cb325819235f28b1, type: 3}
-  m_Name: BeerBottleGun
+  m_Name: FullAutoGun
   m_EditorClassIdentifier: 
-  _weaponName: Beer Bottle
+  _weaponName: Full Auto Gun
   <Payload>k__BackingField:
-    baseDamage: 50
+    baseDamage: 20
     damageType: 0
     attacker: {fileID: 0}
-  _fireRate: 0
-  <FullAuto>k__BackingField: 0
+  _fireRate: 0.07
+  <FullAuto>k__BackingField: 1
   _burstCount: 1
-  _magazineCapacity: 0
-  _reloadDuration: 0
-  _drawsFromReserve: 1
-  _reserveCapacity: 200
-  _spread: 0
-  _projectilePrefab: {fileID: 5201850327758398847, guid: 33755edb820f49848afd0ddd3f119ec8,
+  _magazineCapacity: 30
+  _reloadDuration: 1.5
+  _drawsFromReserve: 0
+  _reserveCapacity: 300
+  _spread: 4
+  _projectilePrefab: {fileID: 5201850327758398847, guid: a160e4183996aa5429b4b501c1e28066,
     type: 3}
-  _projectileLifetime: 10
+  _projectileLifetime: 1.5
   _muzzleFlashPrefab: {fileID: 2926900732954211345, guid: 044d2400bb012dd4ca02f31651faa59b,
     type: 3}
   _cameraShakeDuration: 0.2
-  _cameraShakeMagnitude: 0.2
+  _cameraShakeMagnitude: 0.1

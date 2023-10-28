@@ -110,7 +110,6 @@ public abstract class RangedWeapon : MonoBehaviour
             }
         }
 
-
         for(int i = 0; i < _weaponData.BurstCount; i++) 
         {
             InitializeProjectile();           
@@ -127,8 +126,6 @@ public abstract class RangedWeapon : MonoBehaviour
                 _currentMagazine--;
             }
         }
-
-
 
         //Play muzzle flash if the weapon has one
         if(muzzleFlash){muzzleFlash.Play();}
@@ -256,5 +253,15 @@ public abstract class RangedWeapon : MonoBehaviour
         CR_Cooldown = null;
     }
 
+
+    public void StopOperations()
+    {
+        StopAllCoroutines();
+        CR_Cooldown = null;
+        CR_ReloadTimer = null;
+        
+        canFire = true;
+
+    }
 
 }
