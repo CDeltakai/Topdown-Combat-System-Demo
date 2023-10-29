@@ -31,8 +31,6 @@ public class Bullet : MonoBehaviour, IPoolable
         trailRenderer = GetComponent<TrailRenderer>();
     }
 
-
-    // Start is called before the first frame update
     protected virtual void Start()
     {
         CR_SelfDestruct = StartCoroutine(SelfDestruct(lifetime));
@@ -41,7 +39,7 @@ public class Bullet : MonoBehaviour, IPoolable
     protected virtual void FixedUpdate() 
     {
         //Move bullet with given velocity
-        rigBody.MovePosition(rigBody.position + velocity * Time.fixedDeltaTime * speed);    
+        //rigBody.MovePosition(rigBody.position + velocity * Time.fixedDeltaTime * speed);    
     }
 
     

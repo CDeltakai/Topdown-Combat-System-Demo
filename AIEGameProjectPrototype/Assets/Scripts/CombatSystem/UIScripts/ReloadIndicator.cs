@@ -68,6 +68,7 @@ public class ReloadIndicator : MonoBehaviour
 
     public void BeginAnimateBar()
     {
+        if(!gameObject.activeInHierarchy){ return; }
         animateDuration = currentWeapon.WeaponData.ReloadDuration;
         CR_AnimateBar = StartCoroutine(AnimateBar(animateDuration));
     }

@@ -79,6 +79,7 @@ MonoBehaviour:
   - {fileID: 5250270779742456606, guid: a5847f2dd94998941b64620e5d48962b, type: 3}
   - {fileID: 884086350909531166, guid: ddf73cbab824ed64b8eb6a2d265920b5, type: 3}
   - {fileID: 3999659772212556940, guid: 129869c61a517914da364941dfaf2491, type: 3}
+  - {fileID: 5250270779742456606, guid: 8d1accfa2f9c93b458fb922fb2db6833, type: 3}
   weaponsInScene: []
   _currentWeapon: {fileID: 0}
 --- !u!1 &122036865199361367
@@ -1119,6 +1120,7 @@ GameObject:
   - component: {fileID: 135756642000475821}
   - component: {fileID: 4416926081852918493}
   - component: {fileID: 1762682266}
+  - component: {fileID: 1762682270}
   m_Layer: 8
   m_Name: PlayerArmature
   m_TagString: Player
@@ -1383,8 +1385,30 @@ MonoBehaviour:
   cameraPosition: {fileID: 0}
   reticle: {fileID: 0}
   rotationSpeed: 15
-  aimpointTransform: {fileID: 598536465}
-  staticElevation: 2.059
+  referenceTransform: {fileID: 598536465}
+  clampXDistance: 9
+  clampZDistance: 16
+  reticleSensitivity: 0.75
+  CursorIsVisible: 1
+  reticleIsVisible: 0
+--- !u!114 &1762682270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4416926081852918481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 4
+  outlineColor: {r: 0, g: 0.7750714, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &4523139366846529165
 GameObject:
   m_ObjectHideFlags: 0

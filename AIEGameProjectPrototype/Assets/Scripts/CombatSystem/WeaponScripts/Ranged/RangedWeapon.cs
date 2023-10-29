@@ -214,6 +214,7 @@ public abstract class RangedWeapon : MonoBehaviour
         {
             _currentReserve = _reserveCapacity;
         }
+        OnDischarge?.Invoke();
     }
 
     //Returns true if there is still ammo left, false otherwise.

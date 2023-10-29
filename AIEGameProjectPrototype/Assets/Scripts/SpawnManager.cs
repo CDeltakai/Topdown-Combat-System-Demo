@@ -13,6 +13,8 @@ public class SpawnManager : MonoBehaviour
     public float minDistanceFromPlayer = 10f;
     public float maxDistanceFromPlayer = 20f;
 
+    public bool isActive = true;
+
     void Awake()
     {
         QualitySettings.vSyncCount = 0;
@@ -27,15 +29,13 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!isActive){ return; }
         currentSpawnTimer -= Time.deltaTime;
         if(currentSpawnTimer <= 0)
         {
             currentSpawnTimer = spawnCooldown;
             SpawnEnemy();
         }
-
-
-
     }
 
 
@@ -60,6 +60,18 @@ public class SpawnManager : MonoBehaviour
 
         return new Vector3(x, player.position.y + 2, z);        
     }
+
+    public void ToggleActive()
+    {
+        if(isActive)
+        {
+            isActive = false;
+        }else
+        {
+            isActive = true;
+        }
+    }
+
 
 
 }

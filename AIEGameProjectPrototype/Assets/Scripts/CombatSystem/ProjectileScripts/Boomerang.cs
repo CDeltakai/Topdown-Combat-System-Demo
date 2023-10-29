@@ -5,20 +5,16 @@ using UnityEngine;
 public class Boomerang : Bullet
 {
 
+    public delegate void ReturnedEventHandler();
+    public event ReturnedEventHandler OnReturned;
+
     public Transform shooter;
     [SerializeField] float maxDistance = 10f;
     [SerializeField] float maxFlightTime = 3f;
-    [SerializeField] float returnCurveHeight = 5f;
 
-
-    enum State{Idle, Fired, Returning}
+    enum State{ Fired, Returning}
     State currentState = State.Fired;
 
-    float t = 0; // Parameter for curve
-
-    Vector3 startPosition;
-    Vector3 endPoint;
-    Vector3 controlPoint;
 
     float currentFlightTime = 0;
 
@@ -26,8 +22,6 @@ public class Boomerang : Bullet
     {
         if(currentState == State.Fired)
         {
-            //rigBody.MovePosition(rigBody.position + velocity * Time.fixedDeltaTime * speed);    
-            //rigBody.velocity = transform.forward * speed;
             currentFlightTime += Time.fixedDeltaTime;
 
             if (Vector3.Distance(shooter.position, transform.position) >= maxDistance || currentFlightTime >= maxFlightTime)
@@ -39,6 +33,10 @@ public class Boomerang : Bullet
         {
             Vector3 directionToShooter = (shooter.position - transform.position).normalized;
             rigBody.velocity = directionToShooter * speed;
+            if(Vector3.Distance(transform.position, shooter.position) <= 1f)
+            {
+                DisableObject();
+            }
         }
 
     }
@@ -62,23 +60,34 @@ public class Boomerang : Bullet
 
     void StartReturning()
     {
-        print("start returning");
-        rigBody.velocity = -rigBody.velocity;
         currentState = State.Returning;
-        t = 0;
-        controlPoint = (startPosition + endPoint) / 2 + Vector3.up * returnCurveHeight;
         currentFlightTime = 0;
-        GetComponent<Collider>().enabled = false; // Disable the collider        
+        GetComponent<Collider>().enabled = false; // Disable the collider on returning        
     }
 
 
     protected override void AdditionalActivationOperations()
     {
-        currentState = State.Fired;
-        startPosition = transform.position;
-        endPoint = shooter.position;        
+        GetComponent<Collider>().enabled = true;        
+        currentState = State.Fired;    
     }
 
+    protected override void AdditionalDisableOperations()
+    {
+
+        OnReturned?.Invoke();
+        var invocationList = OnReturned?.GetInvocationList();
+        if (invocationList != null)
+        {
+            foreach (var handler in invocationList)
+            {
+                OnReturned -= (ReturnedEventHandler)handler;
+            }
+        }        
+
+        GetComponent<Collider>().enabled = true;        
+        currentState = State.Fired;
+    }
 
 
 }
