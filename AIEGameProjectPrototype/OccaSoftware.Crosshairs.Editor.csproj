@@ -53,10 +53,10 @@
     <Analyzer Include="C:\Users\Matthew Qiu\.vscode\extensions\visualstudiotoolsforunity.vstuc-0.9.2\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\OccaSoftware\Crosshairs\Editor\StartMenu.cs" />
+    <Compile Include="Assets\CombatSystem\OccaSoftware\Crosshairs\Editor\StartMenu.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\OccaSoftware\Crosshairs\Editor\OccaSoftware.Crosshairs.Editor.asmdef" />
+    <None Include="Assets\CombatSystem\OccaSoftware\Crosshairs\Editor\OccaSoftware.Crosshairs.Editor.asmdef" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
