@@ -73,7 +73,36 @@ public class WeaponHolder : MonoBehaviour
             OnScrollWeapon?.Invoke(_currentWeapon);
         }
 
+    }
 
+    public void ScrollWeaponBackwards()
+    {
+        if(weaponsInScene.Count <= 1) { return; }
+
+        currentWeaponIndex--;
+
+        if(currentWeaponIndex == 0)
+        {
+            currentWeaponIndex = weaponsInScene.Count - 1;
+
+            _currentWeapon.StopOperations();
+
+            _currentWeapon.gameObject.SetActive(false);
+            _currentWeapon = weaponsInScene[currentWeaponIndex];
+            _currentWeapon.gameObject.SetActive(true);
+
+            OnScrollWeapon?.Invoke(_currentWeapon);
+
+        }else
+        {
+            _currentWeapon.StopOperations();
+
+            _currentWeapon.gameObject.SetActive(false);
+            _currentWeapon = weaponsInScene[currentWeaponIndex];
+            _currentWeapon.gameObject.SetActive(true);
+
+            OnScrollWeapon?.Invoke(_currentWeapon);
+        }
 
     }
 
