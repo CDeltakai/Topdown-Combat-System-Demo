@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2045113786}
   - component: {fileID: 2045113787}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ExplosionRadius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 2513808483947676933}
   - component: {fileID: 1069320085245092052}
   - component: {fileID: 4486523600220379776}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BeerBottleProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -389,6 +389,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -20
       objectReference: {fileID: 0}
+    - target: {fileID: 1860055458661968473, guid: c94731d8a7846e649bb809da6680295c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 6552561825397229861, guid: c94731d8a7846e649bb809da6680295c,
         type: 3}
       propertyPath: m_Intensity
@@ -449,10 +454,25 @@ PrefabInstance:
       propertyPath: LightsModule.enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7107189066580242971, guid: c94731d8a7846e649bb809da6680295c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7107282534400360611, guid: c94731d8a7846e649bb809da6680295c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 7107348904651995881, guid: c94731d8a7846e649bb809da6680295c,
         type: 3}
       propertyPath: m_Name
       value: BeerBottleExplosion
+      objectReference: {fileID: 0}
+    - target: {fileID: 7107348904651995881, guid: c94731d8a7846e649bb809da6680295c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7107348904651995881, guid: c94731d8a7846e649bb809da6680295c,
         type: 3}

@@ -70,16 +70,18 @@ public abstract class RangedWeapon : MonoBehaviour
 
         cinemachineImpulseSource = GetComponent<CinemachineImpulseSource>();
 
+        InitializeProjectilePool();
     }
 
     protected virtual void Start()
     {
-        CreateProjectilePool();
     }
 
     //Dynamically create a new projectile pool in the scene for optimization purposes
-    void CreateProjectilePool()
+    public void InitializeProjectilePool()
     {
+        if(projectilePool != null) { return; } // can only have one projectile pool per gun
+
         GameObject newProjectilePool = new(_weaponData.WeaponName +"_ProjectilePool");
         newProjectilePool.AddComponent<GameObjectPool>();
         projectilePool = newProjectilePool.GetComponent<GameObjectPool>();
@@ -148,13 +150,21 @@ public abstract class RangedWeapon : MonoBehaviour
     protected virtual void InitializeProjectile()
     {
         float spread = Random.Range(-_weaponData.Spread, _weaponData.Spread);
-        Vector3 fireDirection = Quaternion.Euler(0, spread, 0) * firePoint.forward;
+
+        Vector3 fireDirection = firePoint.forward;
+
+        // Rotate the fire direction around the global up axis by the spread angle
+        fireDirection = Quaternion.AngleAxis(spread, Vector3.up) * fireDirection;
+
+
+        //Vector3 fireDirection = Quaternion.Euler(0, spread, 0) * firePoint.forward;
 
         GameObject bulletObject = projectilePool.UseObject(bulletObject =>
         {
             Bullet bullet = bulletObject.GetComponent<Bullet>();
             bullet.objectIsPooled = true;
-            bullet.transform.SetPositionAndRotation(firePoint.position, Quaternion.identity);
+            bullet.transform.position = firePoint.position;
+            //bullet.transform.SetPositionAndRotation(firePoint.position, Quaternion.identity);
             bullet.rigBody.velocity = fireDirection * bullet.speed;
             bullet.lifetime = _weaponData.ProjectileLifetime;
             bullet.damagePayload = damagePayload;        

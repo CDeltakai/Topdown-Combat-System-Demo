@@ -25,6 +25,7 @@ public class WeaponHolder : MonoBehaviour
             if(weaponPrefab.GetComponent<RangedWeapon>() != null)
             {
                 RangedWeapon weaponInstance = Instantiate(weaponPrefab, transform).GetComponent<RangedWeapon>();
+                weaponInstance.InitializeProjectilePool();
                 weaponPrefab.SetActive(false);
                 weaponsInScene.Add(weaponInstance);
             }else
