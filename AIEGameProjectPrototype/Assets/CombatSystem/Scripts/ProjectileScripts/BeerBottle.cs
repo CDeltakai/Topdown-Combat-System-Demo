@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
@@ -66,12 +65,6 @@ public class BeerBottle : Bullet
                 targetHealth.Hurt(damagePayload.baseDamage);
             }
         }
-    }
-
-
-    void OnEnable()
-    {
-       
     }
 
 

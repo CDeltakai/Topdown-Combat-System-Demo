@@ -102,7 +102,7 @@ public class HealthMeter : MonoBehaviour
 /// Deal damage to the HealthMeter. If the HealthMeter has ShieldHP, the ShieldHP takes damage before the CurrentHP.
 /// </summary>
 /// <param name="payload"></param>
-    public void Hurt(DamagePayload payload)
+    public virtual void Hurt(DamagePayload payload)
     {
         if(!isActive){ return; }
         if(!canTakeDamage){return;}
@@ -220,5 +220,11 @@ public class HealthMeter : MonoBehaviour
             _maxHP = amount;
         }
     }
+
+    public float GetPercentageRemaining()
+    {
+        return (float)_currentHP / _maxHP;
+    }
+
 
 }

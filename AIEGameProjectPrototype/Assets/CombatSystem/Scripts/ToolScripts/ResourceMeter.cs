@@ -30,7 +30,7 @@ public class ResourceMeter : MonoBehaviour
             {
                 int oldValue = _currentIntValue;
 
-                if(_currentIntValue + value > _maxIntValue)
+                if(_currentIntValue + value > _maxIntValue && !ignoreMaxIntValue)
                 {
                     _currentIntValue = _maxIntValue;
                 }else
@@ -48,7 +48,7 @@ public class ResourceMeter : MonoBehaviour
     }
     [SerializeField] int _maxIntValue;
     public int MaxIntValue{get { return _maxIntValue; }}
-
+    public bool ignoreMaxIntValue = false;
 
 
 [Header("Float Values")]
@@ -64,7 +64,7 @@ public class ResourceMeter : MonoBehaviour
             {
                 float oldValue = _currentFloatValue;
 
-                if(_currentFloatValue + value > _maxFloatValue)
+                if(_currentFloatValue + value > _maxFloatValue && !ignoreMaxFloatValue)
                 {
                     _currentFloatValue = _maxFloatValue;
                 }else
@@ -82,6 +82,8 @@ public class ResourceMeter : MonoBehaviour
     }
     [SerializeField] float _maxFloatValue;
     public float MaxFloatValue{get { return _maxFloatValue; }}
+    public bool ignoreMaxFloatValue = false;
+
 
 
 [Header("Double Values")]
@@ -96,7 +98,7 @@ public class ResourceMeter : MonoBehaviour
             if(_currentDoubleValue != value)
             {
                 double oldValue = _currentDoubleValue;
-                if(_currentDoubleValue + value > _maxDoubleValue)
+                if(_currentDoubleValue + value > _maxDoubleValue && !ignoreMaxDoubleValue)
                 {
                     _currentDoubleValue = _maxDoubleValue;
                 }else
@@ -113,6 +115,7 @@ public class ResourceMeter : MonoBehaviour
     }
     [SerializeField] double _maxDoubleValue;
     public double MaxDoubleValue{get { return _maxDoubleValue; }}
+    public bool ignoreMaxDoubleValue = false;
 
 
     void Awake()

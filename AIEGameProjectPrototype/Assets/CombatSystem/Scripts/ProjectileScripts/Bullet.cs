@@ -6,6 +6,7 @@ using UnityEngine;
 /// Base class for projectiles of all kinds which also implements IPoolable and thus usable within the GameObjectPool class
 /// for optimization purposes.
 /// </summary>
+[RequireComponent(typeof(Collider))]
 [RequireComponent(typeof(Rigidbody))]
 public class Bullet : MonoBehaviour, IPoolable
 {
@@ -36,11 +37,7 @@ public class Bullet : MonoBehaviour, IPoolable
         CR_SelfDestruct = StartCoroutine(SelfDestruct(lifetime));
     }
 
-    protected virtual void FixedUpdate() 
-    {
-        //Move bullet with given velocity
-        //rigBody.MovePosition(rigBody.position + velocity * Time.fixedDeltaTime * speed);    
-    }
+    protected virtual void FixedUpdate() {}
 
     
     protected virtual void OnCollisionEnter(Collision collision)

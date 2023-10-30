@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
 /// </summary>
 public abstract class RangedWeapon : MonoBehaviour
 {
+#region Events and Delegates
     public delegate void DischargeWeaponEventHandler();
     public event DischargeWeaponEventHandler OnDischarge;
 
@@ -17,6 +18,7 @@ public abstract class RangedWeapon : MonoBehaviour
 
     public delegate void StartReloadWeaponEventHandler();
     public event StartReloadWeaponEventHandler OnStartReload;
+#endregion
 
 [Tooltip("The point where projectiles will be spawned from.")]
     [SerializeField] protected Transform firePoint;

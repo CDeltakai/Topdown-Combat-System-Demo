@@ -20,15 +20,13 @@ public class GameObjectPool : MonoBehaviour
 
     void Start()
     {
-        // Check if the prefab has a MonoBehaviour that implements IPoolable
-        if (prefab.GetComponent<IPoolable>() == null)
-        {
-            Debug.LogError("The provided prefab does not contain a MonoBehaviour that implements IPoolable.", this);
-        }
+        ValidatePrefab();
     }
 
     public void AddObject(int amount)
     {
+        if(!ValidatePrefab()){ return; }
+        
         for(int i = 0; i < amount; i++) 
         {
             GameObject instance = Instantiate(prefab, transform);
@@ -44,6 +42,8 @@ public class GameObjectPool : MonoBehaviour
 
     public GameObject UseObject(SetUpObjectDelegate setupDelegate = null)
     {
+        if(!ValidatePrefab()){ return null; }
+
         GameObject instance;
         if(readyPool.Count  == 0)
         {
@@ -65,5 +65,17 @@ public class GameObjectPool : MonoBehaviour
     }
 
 
+    bool ValidatePrefab()
+    {
+        // Check if the prefab has a MonoBehaviour that implements IPoolable
+        if (prefab.GetComponent<IPoolable>() == null)
+        {
+            Debug.LogError("The provided prefab does not contain a MonoBehaviour that implements IPoolable on its root object.", this);
+            return false; 
+        }else
+        {
+            return true;
+        }        
+    }
 
 }
