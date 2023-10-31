@@ -12,7 +12,7 @@ namespace StarterAssets
 
     [RequireComponent(typeof(PlayerInput))]
 
-    public class ThirdPersonController : Entity
+    public class ThirdPersonController : ExampleEntity
     {
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]

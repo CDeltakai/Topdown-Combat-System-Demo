@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : Entity
+public class ExampleEnemy : ExampleEntity
 {
     public Transform player; // Reference to the player's transform
     private NavMeshAgent agent; // Reference to the NavMeshAgent

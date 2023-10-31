@@ -43,7 +43,7 @@ public class BeerBottle : Bullet
 
         if(collision.gameObject.CompareTag("Enemy"))
         {
-            Entity entity = collision.gameObject.GetComponent<Entity>();
+            ExampleEntity entity = collision.gameObject.GetComponent<ExampleEntity>();
             if(entity)
             {
                 ExplodeHits(explosionRadius.transform.position);

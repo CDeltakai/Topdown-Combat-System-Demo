@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnManager : MonoBehaviour
+public class ExampleSceneSpawnManager : MonoBehaviour
 {
     [SerializeField] Transform player;
     [SerializeField] GameObject enemyPrefab;
@@ -42,7 +42,7 @@ public class SpawnManager : MonoBehaviour
     void SpawnEnemy()
     {
         Vector3 spawnPosition = RandomPositionAroundPlayer(minDistanceFromPlayer, maxDistanceFromPlayer);
-        Enemy enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity).GetComponent<Enemy>();
+        ExampleEnemy enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity).GetComponent<ExampleEnemy>();
         enemy.player = player.transform;
     }
 

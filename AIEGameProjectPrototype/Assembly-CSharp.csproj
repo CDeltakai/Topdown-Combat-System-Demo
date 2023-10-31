@@ -84,7 +84,7 @@
     <Compile Include="Assets\UnityTechnologies\ParticlePack\Shared\Scripts\AdjustTimeScale.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
     <Compile Include="Assets\CombatSystem\Scripts\UIScripts\HealthBar.cs" />
-    <Compile Include="Assets\CombatSystem\ExampleScene\SceneSpecficScripts\SpawnManager.cs" />
+    <Compile Include="Assets\CombatSystem\ExampleScene\SceneSpecficScripts\ExampleSceneSpawnManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
     <Compile Include="Assets\CombatSystem\ExampleScene\SceneSpecficScripts\Player\ThirdPersonController.cs" />
     <Compile Include="Assets\CombatSystem\Scripts\ToolScripts\ResourceMeter.cs" />
@@ -92,7 +92,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
-    <Compile Include="Assets\CombatSystem\ExampleScene\SceneSpecficScripts\Entity.cs" />
+    <Compile Include="Assets\CombatSystem\ExampleScene\SceneSpecficScripts\ExampleEntity.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\CombatSystem\Scripts\ScriptableObjects\MeleeWeaponDataSO.cs" />
@@ -110,7 +110,7 @@
     <Compile Include="Assets\CombatSystem\Scripts\ProjectileScripts\Bullet.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
     <Compile Include="Assets\CombatSystem\ExampleScene\ThirdpersonTemplateAssets\Mobile\Scripts\Utilities\MobileDisableAutoSwitchControls.cs" />
-    <Compile Include="Assets\CombatSystem\ExampleScene\SceneSpecficScripts\Enemy.cs" />
+    <Compile Include="Assets\CombatSystem\ExampleScene\SceneSpecficScripts\ExampleEnemy.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
     <Compile Include="Assets\CombatSystem\Scripts\ProjectileScripts\BeerBottle.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
