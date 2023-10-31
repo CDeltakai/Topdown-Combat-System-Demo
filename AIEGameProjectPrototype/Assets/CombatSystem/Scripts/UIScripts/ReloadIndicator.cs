@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Reload bar GUI element that exists in world space using a SpriteRenderer. Hooks up to a WeaponHolder and animates the bar according to the
+/// current weapon in the WeaponHolder's reload duration.
+/// </summary>
 public class ReloadIndicator : MonoBehaviour
 {
     [SerializeField] WeaponHolder weaponHolder;
@@ -10,7 +14,7 @@ public class ReloadIndicator : MonoBehaviour
 
     SpriteRenderer reloadBarSprite;
     [SerializeField]TextMeshPro reloadingText;
-    [SerializeField] float maxSize = 5;
+    [SerializeField] float maxSize = 5; // max size of the reload bar sprite
 
 
     float animateDuration = 5;
@@ -35,10 +39,13 @@ public class ReloadIndicator : MonoBehaviour
         {
             currentWeapon = weaponHolder.CurrentWeapon;
             weaponHolder.OnScrollWeapon += ChangeWeapon;
+            currentWeapon.OnStartReload += BeginAnimateBar;
+        }else
+        {
+            Debug.LogWarning("No WeaponHolder was set, ReloadIndicator will not function.", this);
         }
 
 
-        currentWeapon.OnStartReload += BeginAnimateBar;
     }
 
 
@@ -62,8 +69,6 @@ public class ReloadIndicator : MonoBehaviour
 
         reloadBarSprite.enabled = false;
         reloadingText.enabled = false;
-
-
     }
 
     public void BeginAnimateBar()

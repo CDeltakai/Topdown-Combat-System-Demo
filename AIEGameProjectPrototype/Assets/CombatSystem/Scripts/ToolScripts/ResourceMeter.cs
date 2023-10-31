@@ -120,6 +120,7 @@ public class ResourceMeter : MonoBehaviour
 
     void Awake()
     {
+        
         if(MaxDoubleValue < CurrentDoubleValue)
         {
             _maxDoubleValue = _currentDoubleValue;

@@ -54,7 +54,6 @@ public class Boomerang : Bullet
             targetHealth.Hurt(damagePayload);
         }
 
-
     }
 
 
@@ -62,7 +61,7 @@ public class Boomerang : Bullet
     {
         currentState = State.Returning;
         currentFlightTime = 0;
-        GetComponent<Collider>().enabled = false; // Disable the collider on returning        
+        GetComponent<Collider>().enabled = false; // Disable the collider on returning to prevent it getting stuck on things      
     }
 
 

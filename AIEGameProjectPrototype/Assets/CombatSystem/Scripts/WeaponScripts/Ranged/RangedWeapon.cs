@@ -19,6 +19,10 @@ public abstract class RangedWeapon : MonoBehaviour
 
     public delegate void StartReloadWeaponEventHandler();
     public event StartReloadWeaponEventHandler OnStartReload;
+
+    public delegate void AmmoChangedEventHandler();
+    public event AmmoChangedEventHandler OnAmmoChanged;
+
 #endregion
 
 [Tooltip("The point where projectiles will be spawned from.")]
@@ -37,13 +41,31 @@ public abstract class RangedWeapon : MonoBehaviour
     public int MagazineCapacity{get{ return _magazineCapacity; }}
 
     [SerializeField] protected int _currentMagazine;
-    public int CurrentMagazine{get{ return _currentMagazine; }}
+    public int CurrentMagazine{get{ return _currentMagazine; }
+        private set
+        {
+            if(_currentMagazine != value)
+            {
+                _currentMagazine = value;
+                OnAmmoChanged?.Invoke();
+            }
+        }
+    }
 
     [SerializeField] protected int _reserveCapacity;
     public int ReserveCapacity{get{ return _reserveCapacity; }}
 
     [SerializeField] protected int _currentReserve;
-    public int CurrentReserve{get{ return _currentReserve; }}
+    public int CurrentReserve{get{ return _currentReserve; }
+        private set
+        {
+            if(_currentReserve != value)
+            {
+                _currentReserve = value;
+                OnAmmoChanged?.Invoke();
+            }
+        }
+    }
 
 [Tooltip("If set to true, the weapon will be able to fire regardless of ammo and will not consume ammo.")]
     public bool infiniteAmmo = false;
@@ -164,10 +186,10 @@ public abstract class RangedWeapon : MonoBehaviour
         {
             if(_weaponData.DrawsFromReserve)
             {
-                _currentReserve--;
+                CurrentReserve--;
             }else
             {
-                _currentMagazine--;
+                CurrentMagazine--;
             }
         }
 
@@ -232,12 +254,12 @@ public abstract class RangedWeapon : MonoBehaviour
 
         if(requestedAmmo > _currentReserve)
         {
-            _currentMagazine += _currentReserve;
-            _currentReserve = 0;
+            CurrentMagazine += CurrentReserve;
+            CurrentReserve = 0;
         }else
         {
-            _currentMagazine = _magazineCapacity;
-            _currentReserve -= requestedAmmo;
+            CurrentMagazine = _magazineCapacity;
+            CurrentReserve -= requestedAmmo;
         }
 
         if(WeaponData.OnFinishReloadSFX){ audioSource.PlayOneShot(WeaponData.OnFinishReloadSFX); }
@@ -266,10 +288,10 @@ public abstract class RangedWeapon : MonoBehaviour
 
     public void RestoreAmmoToReserve(int amount)
     {
-        _currentReserve += amount;
+        CurrentReserve += amount;
         if(_currentReserve > _reserveCapacity)
         {
-            _currentReserve = _reserveCapacity;
+            CurrentReserve = _reserveCapacity;
         }
         OnDischarge?.Invoke();
     }

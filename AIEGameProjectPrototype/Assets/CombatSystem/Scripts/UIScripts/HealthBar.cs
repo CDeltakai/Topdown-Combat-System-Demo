@@ -6,12 +6,12 @@ using UnityEngine.UI;
 using System;
 
 /// <summary>
-/// Simple UI health bar component designed to work with the HealthMeter.
+/// Simple UI health bar component which can be hooked up to any HealthMeter to track its HP.
 /// </summary>
 public class HealthBar : MonoBehaviour
 {
 
-    [SerializeField] HealthMeter meter;
+    public HealthMeter meter;
     [SerializeField] Slider bar;
 
     public bool beginVisible;
