@@ -7,7 +7,7 @@ public class DebuggerController : MonoBehaviour
 
     void Awake()
     {
-        Application.targetFrameRate = 144;
+        Application.targetFrameRate = -1;
     }
 
     [RuntimeInitializeOnLoadMethod]
