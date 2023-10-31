@@ -80,6 +80,21 @@ public class RangedWeaponDataSO : ScriptableObject
     [SerializeField] GameObject _muzzleFlashPrefab;
     public GameObject MuzzleFlashPrefab { get{ return _muzzleFlashPrefab; } }
 
+[Header("SFX")]
+    [SerializeField] AudioClip _onFireSFX;
+    public AudioClip OnFireSFX {get{ return _onFireSFX; }}
+
+    [SerializeField] AudioClip _onStartReloadSFX;
+    public AudioClip OnStartReloadSFX {get{ return _onStartReloadSFX; }}
+
+    [SerializeField] AudioClip _midReloadSFX;
+    public AudioClip MidReloadSFX {get{ return _midReloadSFX; }}
+
+    [SerializeField] AudioClip _onFinishReloadSFX;
+    public AudioClip OnFinishReloadSFX {get{ return _onFinishReloadSFX; }}
+
+
+
 [Header("Miscellaneous Properties")]
     [Tooltip("How long the camera shakes for when the weapon is fired.")]
     [Min(0)]

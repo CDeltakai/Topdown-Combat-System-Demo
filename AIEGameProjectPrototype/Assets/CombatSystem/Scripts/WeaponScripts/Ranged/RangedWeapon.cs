@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 /// <summary>
 /// Base class that handles generic functionality of a ranged weapon.
 /// </summary>
+[RequireComponent(typeof(AudioSource))]
 public abstract class RangedWeapon : MonoBehaviour
 {
 #region Events and Delegates
@@ -25,9 +26,11 @@ public abstract class RangedWeapon : MonoBehaviour
     [SerializeField] protected RangedWeaponDataSO _weaponData;
     public RangedWeaponDataSO WeaponData {get{ return _weaponData; }}
 
-    ParticleSystem muzzleFlash;
+    protected ParticleSystem muzzleFlash;
     protected DamagePayload damagePayload;
     protected CinemachineImpulseSource cinemachineImpulseSource;
+    protected GameObjectPool projectilePool;
+    protected AudioSource audioSource;
 
 
     [SerializeField] protected int _magazineCapacity;
@@ -45,9 +48,14 @@ public abstract class RangedWeapon : MonoBehaviour
 [Tooltip("If set to true, the weapon will be able to fire regardless of ammo and will not consume ammo.")]
     public bool infiniteAmmo = false;
 
+[Tooltip("If set to true, weapon will use experimental FixedCooldown system to calculate weapon fire-rate. Theoretically should maintain" + 
+" more consistent and accurate fire-rate even at lower framerates.")]
+    [SerializeField] bool UseFixedCooldown;
 
-    protected GameObjectPool projectilePool;
+    float timeSinceLastShot { get; set; }
+
     bool canFire = true;
+    bool hasFired = false;
     Coroutine CR_ReloadTimer = null;
     Coroutine CR_Cooldown = null;
 
@@ -69,13 +77,41 @@ public abstract class RangedWeapon : MonoBehaviour
         }
 
         cinemachineImpulseSource = GetComponent<CinemachineImpulseSource>();
+        audioSource = GetComponent<AudioSource>();
 
         InitializeProjectilePool();
     }
 
-    protected virtual void Start()
+    protected virtual void Start(){}
+
+    void FixedUpdate()
     {
+        if(UseFixedCooldown)
+        {
+            FixedCooldown();
+        }
     }
+
+/// <summary>
+/// Experimental fixed update based weapon cooldown system - objective is to hopefully reduce the impact of framerate
+/// on weapon fire-rate when framerate is low.
+/// </summary>
+    void FixedCooldown()
+    {
+        if(hasFired)
+        {
+            timeSinceLastShot += Time.fixedDeltaTime;
+            if(timeSinceLastShot >= WeaponData.FireRate)
+            {
+                canFire = true;
+                hasFired = false;
+            }else
+            {
+                canFire = false;
+            }
+        }
+    }
+
 
     //Dynamically create a new projectile pool in the scene for optimization purposes
     public void InitializeProjectilePool()
@@ -104,9 +140,9 @@ public abstract class RangedWeapon : MonoBehaviour
 
     public virtual void PullTrigger()
     {
+        if(!canFire){ return; }
         if(!infiniteAmmo)
         {
-            if(!canFire){ return; }
             if(!CheckAmmo())
             {
                 if(_weaponData.DrawsFromReserve)
@@ -137,15 +173,23 @@ public abstract class RangedWeapon : MonoBehaviour
 
         //Play muzzle flash if the weapon has one
         if(muzzleFlash){muzzleFlash.Play();}
+        if(WeaponData.OnFireSFX){audioSource.PlayOneShot(WeaponData.OnFireSFX);}
 
         //Cooldown
-        CR_Cooldown = StartCoroutine(Cooldown(_weaponData.FireRate));
+        if(UseFixedCooldown)
+        {
+            hasFired = true;
+            canFire = false;
+            timeSinceLastShot = 0f;
+        }else
+        {
+            CR_Cooldown = StartCoroutine(Cooldown(_weaponData.FireRate));
+        }
 
         ShakeCamera();
-
         OnDischarge?.Invoke();
-
     }
+
 
     protected virtual void InitializeProjectile()
     {
@@ -156,15 +200,11 @@ public abstract class RangedWeapon : MonoBehaviour
         // Rotate the fire direction around the global up axis by the spread angle
         fireDirection = Quaternion.AngleAxis(spread, Vector3.up) * fireDirection;
 
-
-        //Vector3 fireDirection = Quaternion.Euler(0, spread, 0) * firePoint.forward;
-
         GameObject bulletObject = projectilePool.UseObject(bulletObject =>
         {
             Bullet bullet = bulletObject.GetComponent<Bullet>();
             bullet.objectIsPooled = true;
             bullet.transform.position = firePoint.position;
-            //bullet.transform.SetPositionAndRotation(firePoint.position, Quaternion.identity);
             bullet.rigBody.velocity = fireDirection * bullet.speed;
             bullet.lifetime = _weaponData.ProjectileLifetime;
             bullet.damagePayload = damagePayload;        
@@ -179,6 +219,8 @@ public abstract class RangedWeapon : MonoBehaviour
         if(CR_ReloadTimer != null) { return; } // if gun is already reloading, return
         if(_currentMagazine == _magazineCapacity) { return; } // if gun is already full, return
         if(_currentReserve <= 0 ) { return; }
+
+        if(WeaponData.OnStartReloadSFX){ audioSource.PlayOneShot(WeaponData.OnStartReloadSFX); }
 
         OnStartReload?.Invoke();
         CR_ReloadTimer = StartCoroutine(ReloadTimer(_weaponData.ReloadDuration));
@@ -198,6 +240,7 @@ public abstract class RangedWeapon : MonoBehaviour
             _currentReserve -= requestedAmmo;
         }
 
+        if(WeaponData.OnFinishReloadSFX){ audioSource.PlayOneShot(WeaponData.OnFinishReloadSFX); }
         OnFinishReload?.Invoke();
 
     }
@@ -210,7 +253,9 @@ public abstract class RangedWeapon : MonoBehaviour
         }
         canFire = false;
 
-        yield return new WaitForSeconds(duration);
+        yield return new WaitForSeconds(duration * 0.5f);
+        if(WeaponData.MidReloadSFX){ audioSource.PlayOneShot(WeaponData.MidReloadSFX); }
+        yield return new WaitForSeconds(duration * 0.5f);
 
         Reload();
         CR_ReloadTimer = null;

@@ -259,6 +259,17 @@
                 },
                 {
                     "name": "",
+                    "id": "28aed60e-aec1-4616-8058-953f40adf048",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "4a4cd43f-af4d-47a7-b193-6a8a7ae48958",
                     "path": "<Keyboard>/r",
                     "interactions": "",

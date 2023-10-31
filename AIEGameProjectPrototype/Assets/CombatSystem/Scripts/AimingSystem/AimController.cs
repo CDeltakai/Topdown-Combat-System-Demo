@@ -69,61 +69,65 @@ public class AimController : MonoBehaviour
         }
     }
 
-
     void RotateTowardsMouse()
     {
+        Vector3 targetPoint = Vector3.zero;
+
         // Generate a plane that intersects the transform's position with an upwards normal.
         Plane playerPlane = new Plane(Vector3.up, referenceTransform.position);
 
-        Ray ray = cameraPosition.ScreenPointToRay(Mouse.current.position.ReadValue());
-
-        // Determine the point where the cursor ray intersects the plane.
-        float hitdist;
-        if (playerPlane.Raycast(ray, out hitdist))
+        // Handle touch or mouse input
+        if (Pointer.current != null)
         {
-            Vector3 targetPoint = ray.GetPoint(hitdist);
-
-            // Determine the target rotation. This is the rotation if the transform looks at the target point.
-            Quaternion targetRotation = Quaternion.LookRotation(targetPoint - referenceTransform.position);
-
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            Ray ray = cameraPosition.ScreenPointToRay(Pointer.current.position.ReadValue());
+            float hitdist;
+            if (playerPlane.Raycast(ray, out hitdist))
+            {
+                targetPoint = ray.GetPoint(hitdist);
+            }
         }
+
+        // Determine the target rotation. This is the rotation if the transform looks at the target point.
+        Quaternion targetRotation = Quaternion.LookRotation(targetPoint - referenceTransform.position);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
+
 
     void PositionReticle()
     {
-        if(!reticle) { return; }
-        if(!referenceTransform) { return; }
+        if (!reticle || !referenceTransform) return;
 
         Plane firePointPlane = new Plane(Vector3.up, referenceTransform.position);
-        Ray ray = cameraPosition.ScreenPointToRay(Mouse.current.position.ReadValue());
+        Ray ray;
+        Vector3 hitPosition = Vector3.zero;
 
-        float hitdist;
-        if (firePointPlane.Raycast(ray, out hitdist))
+        // Handle touch or mouse input
+        if (Pointer.current != null)
         {
-            Vector3 hitPosition = ray.GetPoint(hitdist);
-
-
-            Vector3 offset = hitPosition - referenceTransform.position;
-            offset *= reticleSensitivity;
-
-            // Clamps the position of the reticle to a certain distance from the reference transform
-            // Clamp each component of the offset separately to create a rectangular clamp
-            offset.x = Mathf.Clamp(offset.x, -clampXDistance, clampXDistance);
-            offset.z = Mathf.Clamp(offset.z, -clampZDistance, clampZDistance);
-
-            hitPosition = referenceTransform.position + offset;
-
-
-            if(referenceTransform != null)
+            ray = cameraPosition.ScreenPointToRay(Pointer.current.position.ReadValue());
+            float hitdist;
+            if (firePointPlane.Raycast(ray, out hitdist))
             {
-                hitPosition.y = referenceTransform.position.y;
+                hitPosition = ray.GetPoint(hitdist);
             }
+        }
 
+        Vector3 offset = hitPosition - referenceTransform.position;
+        offset *= reticleSensitivity;
 
-            reticle.transform.position = hitPosition; // Position the reticle at the hit point
+        // Clamps the position of the reticle to a certain distance from the reference transform
+        // Clamp each component of the offset separately to create a rectangular clamp
+        offset.x = Mathf.Clamp(offset.x, -clampXDistance, clampXDistance);
+        offset.z = Mathf.Clamp(offset.z, -clampZDistance, clampZDistance);
 
-        }        
+        hitPosition = referenceTransform.position + offset;
+
+        if (referenceTransform != null)
+        {
+            hitPosition.y = referenceTransform.position.y;
+        }
+
+        reticle.transform.position = hitPosition; // Position the reticle at the hit point
     }
 
 

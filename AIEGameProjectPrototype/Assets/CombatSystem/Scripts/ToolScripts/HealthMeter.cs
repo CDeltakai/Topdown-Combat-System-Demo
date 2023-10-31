@@ -31,7 +31,7 @@ public class HealthMeter : MonoBehaviour
     public bool disableAfterDepletion = false;
 
 [Tooltip("If false, object will not react to method calls.")]
-    [SerializeField] bool isActive = true;
+    public bool isActive = true;
 
     [Min(0)]
     [SerializeField] int _currentHP = 100;

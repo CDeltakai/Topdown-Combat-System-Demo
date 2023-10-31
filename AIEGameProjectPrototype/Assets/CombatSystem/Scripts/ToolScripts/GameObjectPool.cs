@@ -18,15 +18,17 @@ public class GameObjectPool : MonoBehaviour
     Stack<GameObject> readyPool = new Stack<GameObject>();
 
 
+
     void Start()
     {
         ValidatePrefab();
+
     }
 
     public void AddObject(int amount)
     {
         if(!ValidatePrefab()){ return; }
-        
+
         for(int i = 0; i < amount; i++) 
         {
             GameObject instance = Instantiate(prefab, transform);

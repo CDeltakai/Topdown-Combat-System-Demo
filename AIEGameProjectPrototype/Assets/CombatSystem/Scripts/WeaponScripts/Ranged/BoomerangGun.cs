@@ -21,7 +21,7 @@ public class BoomerangGun : RangedWeapon
             }
 
             boomerang.objectIsPooled = true;
-            boomerang.transform.SetPositionAndRotation(firePoint.position, Quaternion.identity);
+            boomerang.transform.position = firePoint.position;
             boomerang.rigBody.velocity = fireDirection * boomerang.speed;
             boomerang.lifetime = _weaponData.ProjectileLifetime;
             boomerang.damagePayload = damagePayload;

@@ -118,11 +118,7 @@ namespace StarterAssets
         {
             get
             {
-
                 return _playerInput.currentControlScheme == "KeyboardMouse";
-
-
-
             }
         }
 
@@ -130,7 +126,8 @@ namespace StarterAssets
 
         [SerializeField] WeaponHolder weaponHolder;
         [SerializeField] Gun currentGun;
-
+        [SerializeField] float physicsMoveSpeed;
+        Rigidbody rigbody;
 
         private void Awake()
         {
@@ -139,6 +136,9 @@ namespace StarterAssets
             {
                 _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
             }
+
+            rigbody = GetComponent<Rigidbody>();
+
         }
 
         private void Start()
@@ -162,15 +162,12 @@ namespace StarterAssets
 
         private void FixedUpdate() 
         {
-            if(weaponHolder.CurrentWeapon.WeaponData.FullAuto)
-            {
-                if(Mouse.current.leftButton.isPressed)
-                {
-                    OnShoot();
-                }
-            }            
-        }
 
+
+            //PhysicsMove();
+
+        }
+        float timeSinceLastShot = 0;
         private void Update()
         {
             _hasAnimator = TryGetComponent(out _animator);
@@ -179,8 +176,34 @@ namespace StarterAssets
             GroundedCheck();
             Move();
 
-            PlayerContainer.position = gameObject.transform.position;
+            if(weaponHolder.CurrentWeapon.WeaponData.FullAuto)
+            {
 
+                if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed)
+                {
+                    OnShoot();
+                }
+
+                if(Mouse.current.leftButton.isPressed)
+                {
+                    timeSinceLastShot += Time.deltaTime;
+                    OnShoot();
+                    if(timeSinceLastShot >= weaponHolder.CurrentWeapon.WeaponData.FireRate)
+                    {
+                        OnShoot();
+                        timeSinceLastShot = 0;
+                    }
+                }else
+                {
+                    timeSinceLastShot = 0;
+                }
+            }
+
+
+            if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
+            {
+                OnShoot();
+            }
 
 
 
@@ -235,6 +258,38 @@ namespace StarterAssets
             CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
                 _cinemachineTargetYaw, 0.0f);
         }
+
+        public void PhysicsMove()
+        {
+            float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
+
+            float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
+            if (_animationBlend < 0.01f) _animationBlend = 0f;
+
+            if(_input.move != Vector2.zero)
+            {
+                float actualSpeed = physicsMoveSpeed;
+                if(_input.sprint)
+                {
+                    actualSpeed *= 1.5f;
+                }
+                rigbody.velocity = new Vector3(_input.move.y, rigbody.velocity.y, -_input.move.x) * actualSpeed;
+            }else
+            {
+                targetSpeed = 0;
+                rigbody.velocity = Vector3.zero;
+            }
+
+            _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.fixedDeltaTime * SpeedChangeRate);
+
+            if (_hasAnimator)
+            {
+                _animator.SetFloat(_animIDSpeed, _animationBlend);
+                _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
+            }         
+
+        }
+
 
         public void Move()
         {
@@ -294,8 +349,12 @@ namespace StarterAssets
             Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
             // move the player
-            _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
+            // _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
+            //                 new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+
+            _controller.Move(targetDirection.normalized * _speed * Time.deltaTime +
                             new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+
 
             // update animator if using character
             if (_hasAnimator)
@@ -304,9 +363,7 @@ namespace StarterAssets
                 _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
             }
 
-            
-
-
+        
 
         }
 

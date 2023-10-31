@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Interface designed to work with the GameObjectPool system.
+/// </summary>
 public interface IPoolable 
 {
 

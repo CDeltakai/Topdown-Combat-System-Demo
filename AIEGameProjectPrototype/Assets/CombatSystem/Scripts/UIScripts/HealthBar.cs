@@ -5,6 +5,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
+/// <summary>
+/// Simple UI health bar component designed to work with the HealthMeter.
+/// </summary>
 public class HealthBar : MonoBehaviour
 {
 
@@ -29,8 +32,8 @@ public class HealthBar : MonoBehaviour
 
     private void UpdateBar(int oldValue, int newValue)
     {
-        float percentRemaining = (float) meter.CurrentHP / meter.MaxHP;
-        bar.value = percentRemaining;
+        //float percentRemaining = (float) meter.CurrentHP / meter.MaxHP;
+        bar.value = meter.GetPercentageRemaining();
         bar.gameObject.SetActive(true);
     }
 
