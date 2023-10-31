@@ -132,6 +132,7 @@
     <Compile Include="Assets\CombatSystem\Scripts\HelperClasses\VectorDirections.cs" />
     <Compile Include="Assets\CombatSystem\QuickOutline\Scripts\Outline.cs" />
     <Compile Include="Assets\CombatSystem\ExampleScene\SceneSpecficScripts\Quit.cs" />
+    <Compile Include="Assets\CombatSystem\ExampleScene\SceneSpecficScripts\DebuggerController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -32,7 +32,6 @@ public class HealthBar : MonoBehaviour
 
     private void UpdateBar(int oldValue, int newValue)
     {
-        //float percentRemaining = (float) meter.CurrentHP / meter.MaxHP;
         bar.value = meter.GetPercentageRemaining();
         bar.gameObject.SetActive(true);
     }

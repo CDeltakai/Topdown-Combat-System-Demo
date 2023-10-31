@@ -163,7 +163,27 @@ namespace StarterAssets
         private void FixedUpdate() 
         {
 
+            if(weaponHolder.CurrentWeapon.WeaponData.FullAuto)
+            {
 
+                if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed)
+                {
+                    OnShoot();
+                }
+
+                if(Mouse.current.leftButton.isPressed)
+                {
+
+                    OnShoot();
+
+                }
+            }
+
+
+            if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
+            {
+                OnShoot();
+            }
             //PhysicsMove();
 
         }
@@ -176,34 +196,7 @@ namespace StarterAssets
             GroundedCheck();
             Move();
 
-            if(weaponHolder.CurrentWeapon.WeaponData.FullAuto)
-            {
 
-                if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed)
-                {
-                    OnShoot();
-                }
-
-                if(Mouse.current.leftButton.isPressed)
-                {
-                    timeSinceLastShot += Time.deltaTime;
-                    OnShoot();
-                    if(timeSinceLastShot >= weaponHolder.CurrentWeapon.WeaponData.FireRate)
-                    {
-                        OnShoot();
-                        timeSinceLastShot = 0;
-                    }
-                }else
-                {
-                    timeSinceLastShot = 0;
-                }
-            }
-
-
-            if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
-            {
-                OnShoot();
-            }
 
 
 
