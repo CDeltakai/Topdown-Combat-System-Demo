@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 /// <summary>
 /// Aiming system designed for top-down perspective. Rotates the object it is attached to
-/// towards the mouse position. Also supports a reticle object if given one.
+/// towards the mouse/pointer position. Also supports a reticle object if given one.
 /// </summary>
 public class AimController : MonoBehaviour
 {

@@ -10,12 +10,21 @@ public class ResourceMeter : MonoBehaviour
 {
     public delegate void IntValueChangedEventHandler(int oldValue, int newValue);
     public event IntValueChangedEventHandler OnIntValueChanged;
+    public delegate void IntValueModifiedEventHandler();
+    public event IntValueModifiedEventHandler OnIntValueModified;
+
 
     public delegate void FloatValueChangedEventHandler(float oldValue, float newValue);
     public event FloatValueChangedEventHandler OnFloatValueChanged;
+    public delegate void FloatValueModifiedEventHandler();
+    public event FloatValueModifiedEventHandler OnFloatValueModified;
+
 
     public delegate void DoubleValueChangedEventHandler(double oldValue, double newValue);
     public event DoubleValueChangedEventHandler OnDoubleValueChanged;
+    public delegate void DoubleValueModifiedEventHandler();
+    public event DoubleValueModifiedEventHandler OnDoubleValueModified;
+
 
 [Header("Int Values")]
     [Min(0)]
@@ -43,6 +52,7 @@ public class ResourceMeter : MonoBehaviour
                 }
 
                 OnIntValueChanged?.Invoke(oldValue, _currentIntValue);
+                OnIntValueModified?.Invoke();
             }
         }
     }
@@ -77,6 +87,7 @@ public class ResourceMeter : MonoBehaviour
                 }
 
                 OnFloatValueChanged?.Invoke(oldValue, _currentFloatValue);
+                OnFloatValueModified?.Invoke();
             }
         }
     }
@@ -110,6 +121,7 @@ public class ResourceMeter : MonoBehaviour
                     _currentDoubleValue = value;
                 }
                 OnDoubleValueChanged?.Invoke(oldValue, _currentDoubleValue);
+                OnDoubleValueModified?.Invoke();
             }
         }
     }
