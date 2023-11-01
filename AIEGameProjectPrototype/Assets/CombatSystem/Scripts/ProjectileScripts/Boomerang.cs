@@ -44,16 +44,12 @@ public class Boomerang : Bullet
 
     protected override void OnCollisionEnter(Collision collision)
     {
-        if (currentState == State.Fired && (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Wall")))
-        {
-            StartReturning();
-        }
-        if(collision.gameObject.CompareTag("Enemy"))
-        {
-            HealthMeter targetHealth = collision.gameObject.GetComponent<HealthMeter>();
-            targetHealth.Hurt(damagePayload);
-        }
 
+        StartReturning();
+
+        HealthMeter targetHealth = collision.gameObject.GetComponent<HealthMeter>();
+        targetHealth.Hurt(damagePayload);
+        
     }
 
 

@@ -32,35 +32,19 @@ public class BeerBottle : Bullet
 
     protected override void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Wall") )
-        {
-
-            ExplodeHits(explosionRadius.transform.position);
-            StartCoroutine(ExplosionParticleTimer(particleEffectDuration));
-
-            return;
-        }
-
-        if(collision.gameObject.CompareTag("Enemy"))
-        {
-            ExampleEntity entity = collision.gameObject.GetComponent<ExampleEntity>();
-            if(entity)
-            {
-                ExplodeHits(explosionRadius.transform.position);
-                StartCoroutine(ExplosionParticleTimer(particleEffectDuration));
-
-            }
-        }
+        ExplodeHits(explosionRadius.transform.position);
+        StartCoroutine(ExplosionParticleTimer(particleEffectDuration));   
     }
 
     void ExplodeHits(Vector3 explosionPosition)
     {
         Collider[] hitColliders = Physics.OverlapSphere(explosionPosition, explosionRadius.radius, targetLayer);
+        
 
         foreach(var hitCollder in hitColliders)
         {
             HealthMeter targetHealth = hitCollder.GetComponent<HealthMeter>();
-            if(targetHealth && targetHealth.CompareTag("Enemy"))
+            if(targetHealth)
             {
                 targetHealth.Hurt(damagePayload.baseDamage);
             }

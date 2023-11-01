@@ -8,6 +8,11 @@ using UnityEngine;
 /// </summary>
 public class ResourceMeter : MonoBehaviour
 {
+//Each value type has two events assosciated with it: OnXValueChanged and OnXValueModified. The difference between the two is just
+//their input parameters. OnXValueChanged inputs an old value and new value and allows for more granular control and operations on the
+//actual values. OnXValueModified on the other hand just raises whenever the value itself is modified some way and requires no parameters - 
+//useful for when you only need to know when the value has changed and not the specifics of how it changed.
+
     public delegate void IntValueChangedEventHandler(int oldValue, int newValue);
     public event IntValueChangedEventHandler OnIntValueChanged;
     public delegate void IntValueModifiedEventHandler();
@@ -132,20 +137,28 @@ public class ResourceMeter : MonoBehaviour
 
     void Awake()
     {
-        
-        if(MaxDoubleValue < CurrentDoubleValue)
+        if(!ignoreMaxDoubleValue)
         {
-            _maxDoubleValue = _currentDoubleValue;
+            if(MaxDoubleValue < CurrentDoubleValue)
+            {
+                _maxDoubleValue = _currentDoubleValue;
+            }
         }
 
-        if(MaxFloatValue < CurrentFloatValue)
+        if(!ignoreMaxFloatValue)
         {
-            _maxFloatValue = _currentFloatValue;
-        }        
+            if(MaxFloatValue < CurrentFloatValue)
+            {
+                _maxFloatValue = _currentFloatValue;
+            }        
+        }
 
-        if(MaxIntValue < CurrentIntValue)
+        if(!ignoreMaxIntValue)
         {
-            _maxIntValue = _currentIntValue;
+            if(MaxIntValue < CurrentIntValue)
+            {
+                _maxIntValue = _currentIntValue;
+            }
         }
 
     }
@@ -153,16 +166,31 @@ public class ResourceMeter : MonoBehaviour
 
     public float GetIntValuePercentage()
     {
+        if(ignoreMaxIntValue)
+        {
+            Debug.LogWarning("Max value has been ignored for the Int Value on this ResourceMeter, returned float.Epsilon for GetIntValuePercentage", this);
+            return float.Epsilon;
+        }
         return (float)_currentIntValue / _maxIntValue;
     }
 
     public float GetFloatValuePercentage()
     {
+        if(ignoreMaxFloatValue)
+        {
+            Debug.LogWarning("Max value has been ignored for the Float Value on this ResourceMeter, returned float.Epsilon for GetFloatValuePercentage", this);
+            return float.Epsilon;
+        }        
         return _currentFloatValue / _maxFloatValue;
     }
 
     public float GetDoubleValuePercentage()
     {
+        if(ignoreMaxDoubleValue)
+        {
+            Debug.LogWarning("Max value has been ignored for the Double Value on this ResourceMeter, returned float.Epsilon for GetDoubleValuePercentage", this);
+            return float.Epsilon;
+        }         
         return (float)(_currentDoubleValue / _maxDoubleValue);
     }
 

@@ -25,7 +25,7 @@ public class ResourceBar : MonoBehaviour
         }
     }
 
-    void SubscribeResourceMeter()
+    public void SubscribeResourceMeter()
     {
         switch (meterType)
         {

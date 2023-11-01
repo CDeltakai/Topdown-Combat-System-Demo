@@ -134,6 +134,7 @@
     <Compile Include="Assets\CombatSystem\ExampleScene\SceneSpecficScripts\Quit.cs" />
     <Compile Include="Assets\CombatSystem\ExampleScene\SceneSpecficScripts\DebuggerController.cs" />
     <Compile Include="Assets\CombatSystem\Scripts\UIScripts\ResourceBar.cs" />
+    <Compile Include="Assets\CombatSystem\ExampleScene\SceneSpecficScripts\BreakableBox.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

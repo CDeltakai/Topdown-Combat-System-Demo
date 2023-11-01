@@ -43,33 +43,18 @@ public class Bullet : MonoBehaviour, IPoolable
     protected virtual void OnCollisionEnter(Collision collision)
     {
 
-        if(collision.gameObject.CompareTag("Wall"))
+        HealthMeter targetHealth = collision.gameObject.GetComponent<HealthMeter>();
+        if(targetHealth)
         {
-            if(objectIsPooled)
-            {
-                DisableObject();
-            }else
-            {
-                Destroy(gameObject);
-            }
-            return;
+            targetHealth.Hurt(damagePayload.baseDamage);
+
         }
-
-        if(collision.gameObject.CompareTag("Enemy"))
+        if(objectIsPooled)
         {
-            HealthMeter targetHealth = collision.gameObject.GetComponent<HealthMeter>();
-            if(targetHealth)
-            {
-                targetHealth.Hurt(damagePayload.baseDamage);
-
-                if(objectIsPooled)
-                {
-                    DisableObject();
-                }else
-                {
-                    Destroy(gameObject);
-                }
-            }
+            DisableObject();
+        }else
+        {
+            Destroy(gameObject);
         }
         
     }
