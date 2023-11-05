@@ -33,7 +33,7 @@ public class Boomerang : Bullet
         {
             Vector3 directionToShooter = (shooter.position - transform.position).normalized;
             rigBody.velocity = directionToShooter * speed;
-            if(Vector3.Distance(transform.position, shooter.position) <= 1f)
+            if(Vector3.Distance(transform.position, shooter.position) <= 0.5f)
             {
                 DisableObject();
             }
@@ -44,9 +44,9 @@ public class Boomerang : Bullet
 
     protected override void OnCollisionEnter(Collision collision)
     {
-
+        
+        
         StartReturning();
-
         HealthMeter targetHealth = collision.gameObject.GetComponent<HealthMeter>();
         targetHealth.Hurt(damagePayload);
         
