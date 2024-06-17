@@ -44,11 +44,12 @@ public class Boomerang : Bullet
 
     protected override void OnCollisionEnter(Collision collision)
     {
-        
-        
         StartReturning();
         HealthMeter targetHealth = collision.gameObject.GetComponent<HealthMeter>();
-        targetHealth.Hurt(damagePayload);
+        if(targetHealth)
+        {
+            targetHealth.Hurt(damagePayload);
+        }
         
     }
 

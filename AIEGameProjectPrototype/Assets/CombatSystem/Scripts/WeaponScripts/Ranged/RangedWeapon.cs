@@ -135,7 +135,9 @@ public abstract class RangedWeapon : MonoBehaviour
     }
 
 
-    //Dynamically create a new projectile pool in the scene for optimization purposes
+    /// <summary>
+    /// Dynamically create a new projectile pool in the scene for optimization purposes
+    /// </summary>
     public void InitializeProjectilePool()
     {
         if(projectilePool != null) { return; } // can only have one projectile pool per gun
