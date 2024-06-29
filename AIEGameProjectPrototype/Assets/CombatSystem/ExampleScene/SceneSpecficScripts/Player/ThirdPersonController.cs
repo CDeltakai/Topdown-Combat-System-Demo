@@ -363,13 +363,11 @@ namespace StarterAssets
         void OnShoot()
         {
             weaponHolder.CurrentWeapon.PullTrigger();
-            //currentGun.PullTrigger();
         }
 
         void OnReload()
         {
             weaponHolder.CurrentWeapon.StartReload();
-            //currentGun.StartReload();
         }
 
         void OnScrollWeapon()

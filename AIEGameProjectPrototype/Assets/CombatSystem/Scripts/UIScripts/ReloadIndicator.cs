@@ -9,7 +9,7 @@ using UnityEngine;
 /// </summary>
 public class ReloadIndicator : MonoBehaviour
 {
-    [SerializeField] WeaponHolder weaponHolder;
+    public WeaponHolder weaponHolder;
     RangedWeapon currentWeapon;
 
     SpriteRenderer reloadBarSprite;

@@ -15,6 +15,7 @@ public class AimController : MonoBehaviour
 [Tooltip("The speed at which the object rotates towards the mouse.")]    
     [SerializeField] float rotationSpeed = 7;
 
+[Tooltip("The transform that dictates the hieght at which the reticle will be placed. Should normally coincide with the firing point of the weapon of the player.")]
     [SerializeField] Transform referenceTransform;
 
 [Tooltip("The max X distance the reticle object can be from the reference transform.")]    
